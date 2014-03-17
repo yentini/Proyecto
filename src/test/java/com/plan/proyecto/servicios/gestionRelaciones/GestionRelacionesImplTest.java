@@ -143,4 +143,49 @@ public class GestionRelacionesImplTest {
         result = gr.sonAmigos(destino, destino2);
         assertEquals(expResult, result);
     }
+
+    /**
+     * Test of mostrarAmigos method, of class GestionRelacionesImpl.
+     */
+//    @Test
+//    public void testMostrarAmigos() {
+//        System.out.println("mostrarAmigos");
+//        Cuenta cuenta = null;
+//        GestionRelacionesImpl instance = new GestionRelacionesImpl();
+//        List<Cuenta> expResult = null;
+//        List<Cuenta> result = instance.mostrarAmigos(cuenta);
+//        assertEquals(expResult, result);
+//        // TODO review the generated test code and remove the default call to fail.
+//        fail("The test case is a prototype.");
+//    }
+
+    /**
+     * Test of quitarAmigos method, of class GestionRelacionesImpl.
+     */
+    @Test
+    public void testQuitarAmigos() {
+        System.out.println("QuitarAmigos");
+        Cuenta origen = new Cuenta("email1", "pwd1");
+        Cuenta destino = new Cuenta("email2", "pwd2");
+        Cuenta destino2 = new Cuenta("email3", "pwd3");
+
+        instance.AltaCuenta(origen);
+        instance.AltaCuenta(destino);
+        instance.AltaCuenta(destino2);  
+
+        gr.hacerAmigos(origen, destino);
+        
+        gr.hacerAmigos(origen, destino2);
+        
+        Boolean expResult = true;
+        Boolean result = gr.sonAmigos(origen, destino);
+        assertEquals(expResult, result);
+        
+        gr.quitarAmigos(origen, destino);
+        
+        expResult = false;
+        result = gr.sonAmigos(origen, destino);
+        assertEquals(expResult, result);
+        
+    }
 }
