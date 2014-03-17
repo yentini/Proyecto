@@ -40,18 +40,13 @@ public class GestionRelacionesImpl implements GestionRelaciones {
         return listaDevolver;
     }
 
-    @Override
-    public Cuenta hacerAmigos1(Cuenta origen, Cuenta amigo) {
-
-        origen.getAmigos().add(amigo);
-        return amigo;
-    }
-
     private Cuenta hacerAmigo(Cuenta origen, Cuenta amigo) {
+        Cuenta retorno = null;
         if (!sonAmigos(origen, amigo)) {
             origen.getAmigos().add(amigo);
+            retorno = amigo;
         }
-        return origen;
+        return retorno;
     }
 
     @Override
@@ -62,6 +57,25 @@ public class GestionRelacionesImpl implements GestionRelaciones {
     @Override
     public List<Cuenta> mostrarAmigos(Cuenta cuenta) {
         return dao.findAmigosByCuenta(cuenta);
+    }
+
+    @Override
+    public List<Cuenta> quitarAmigos(Cuenta origen, Cuenta... amigos) {
+        List<Cuenta> listaDevolver = new ArrayList<>();
+        for (Cuenta cuenta : amigos) {
+            listaDevolver.add(quitarAmigo(origen, cuenta));
+        }
+        dao.modificar(origen);
+        return listaDevolver;
+    }
+
+    private Cuenta quitarAmigo(Cuenta origen, Cuenta amigo) {
+        Cuenta retorno = null;
+        if (sonAmigos(origen, amigo)) {
+            origen.getAmigos().remove(amigo);
+            retorno = amigo;
+        }
+        return retorno;
     }
 
 }
