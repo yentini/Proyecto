@@ -6,9 +6,9 @@
 package com.plan.proyecto.servicios.gestionContenidos;
 
 import com.plan.proyecto.beans.Contenido;
-import com.plan.proyecto.beans.ContenidoEnlace;
+import com.plan.proyecto.beans.Mensaje;
 import com.plan.proyecto.beans.ContenidoImagen;
-import com.plan.proyecto.beans.ContenidoTexto;
+import com.plan.proyecto.beans.Comentario;
 import com.plan.proyecto.beans.Cuenta;
 import com.plan.proyecto.repositorios.DaoCuenta;
 import com.plan.proyecto.servicios.gestionCuentas.GestionCuentas;
@@ -73,13 +73,13 @@ public class gestionContenidosImplsTest {
     public void testPublicarContenido() {
         log.log(Level.INFO, "Publicar Contenido");
         log.log(Level.INFO, "Prueba de publicación de un contenido");
-        
+
         Cuenta cuenta = new Cuenta();
         cuenta.setNombre("cesar");
         cuenta.setEmail("miemail");
         instance.AltaCuenta(cuenta);
 
-        Contenido contenido = new ContenidoTexto("Texto prueba");
+        Contenido contenido = new Mensaje("Texto prueba");
 
         Boolean result = gc.publicarContenido(cuenta, contenido);
 
@@ -100,20 +100,20 @@ public class gestionContenidosImplsTest {
         cuenta.setNombre("cesar");
         cuenta.setEmail("cesar1");
         instance.AltaCuenta(cuenta);
-        
-        Contenido contenido = new ContenidoTexto("Texto prueba");
+
+        Contenido contenido = new Mensaje("Texto prueba");
         gc.publicarContenido(cuenta, contenido);
-        
+
         cuenta = dao.findByNombre("cesar").get(0);
-        Contenido contenido1 = new ContenidoEnlace("Texto prueba", "url prueba");
+        Contenido contenido1 = new Mensaje("Texto prueba");
         gc.publicarContenido(cuenta, contenido1);
-        
+
         cuenta = dao.findByNombre("cesar").get(0);
         Contenido contenido2 = new ContenidoImagen("url imagen pruebas");
         gc.publicarContenido(cuenta, contenido2);
-               
+
         Boolean result = gc.eliminarContenido(cuenta, contenido);
-     
+
         Boolean expResult = true;
         assertEquals(expResult, result);
         log.log(Level.INFO, "Prueba de inserción de un segundo usuario repetido, terminada");
@@ -132,24 +132,53 @@ public class gestionContenidosImplsTest {
         cuenta.setEmail("miemail2");
         instance.AltaCuenta(cuenta);
 
-        Contenido contenido1 = new ContenidoTexto("Texto prueba 1");        
-        gc.publicarContenido(cuenta, contenido1);        
-        
-        cuenta = dao.findByNombre("piedad").get(0);    
+        Contenido contenido1 = new Mensaje("Texto prueba 1");
+        gc.publicarContenido(cuenta, contenido1);
+
+        cuenta = dao.findByNombre("piedad").get(0);
         List<Contenido> contenidos = gc.mostrarContenidos(cuenta);
-   
-        Contenido contenido2 = new ContenidoEnlace("Texto prueba 2", "url prueba");
+
+        Contenido contenido2 = new Mensaje("Texto prueba 2");
         gc.publicarContenido(cuenta, contenido2);
-              
+
         Contenido contenido3 = new ContenidoImagen("url imagen pruebas");
         cuenta = dao.findByEmail("miemail2");
         contenidos = gc.mostrarContenidos(cuenta);
         gc.publicarContenido(cuenta, contenido3);
 
-        cuenta = dao.findByEmail("miemail2");        
+        cuenta = dao.findByEmail("miemail2");
         contenidos = gc.mostrarContenidos(cuenta);
         assertEquals(contenidos.size(), 3);
 
+    }
+
+    /**
+     * Test of publicarComentario method, of class gestionContenidosImpls.
+     */
+    @Test
+    public void testPublicarComentario() {
+        log.log(Level.INFO, "Publicar comentario");
+        log.log(Level.INFO, "Prueba de publicación de un comentario");
+
+        Cuenta cuenta = new Cuenta();
+        cuenta.setNombre("cesar");
+        cuenta.setEmail("miemail");
+        instance.AltaCuenta(cuenta);
+        
+        Cuenta cuenta2 = new Cuenta();
+        cuenta2.setNombre("cesar");
+        cuenta2.setEmail("miemail");
+        instance.AltaCuenta(cuenta2);
+
+        Contenido mensaje = new Mensaje("Mensaje prueba");
+        gc.publicarContenido(cuenta, mensaje);
+        
+        Contenido comentario = new Comentario("Comentario prueba");
+        Boolean result = gc.publicarComentario(cuenta2, mensaje, comentario);
+
+        Boolean expResult = true;
+        assertEquals(expResult, result);
+        log.log(Level.INFO, "Prueba de inserción de un contenido, terminada");
     }
 
 }

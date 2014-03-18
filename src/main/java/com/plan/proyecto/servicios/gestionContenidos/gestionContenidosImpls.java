@@ -58,31 +58,38 @@ public class gestionContenidosImpls implements GestionContenidos {
     @Override
     public List<Contenido> mostrarContenidos(Cuenta cuenta) {
         if (cuenta == null) {
-            
+
             return null;
         }
-        
+
         Cuenta c = dao.findByNombre(cuenta.getNombre()).get(0);
         return dao.findContenidosByCuenta(c.getId());
     }
 
     @Override
-    public boolean publicarComentario(Cuenta cuenta, Contenido contenido, Contenido comentario) {
-         if (cuenta == null) {
+    public boolean publicarComentario(Cuenta cuenta, Contenido mensaje, Contenido comentario) {
+        if (cuenta == null) {
             return false;
         }
-        if (contenido == null) {
-            return false;
-        }        
-        if (comentario == null) {
+        if (mensaje == null) {
             return false;
         }
 
-        Cuenta recuperado = dao.findByEmail(cuenta.getEmail());
-        recuperado.getContenidos().add(contenido);
-        contenido.setCuenta(recuperado);
+        if (comentario == null) {
+            Cuenta cuentaRecuperada = dao.findByEmail(cuenta.getEmail());
+            cuentaRecuperada.getContenidos().add(mensaje);
+            mensaje.setCuenta(cuentaRecuperada);
 //        dao.modificar(recuperado);
+            return true;
+        }
+        Cuenta cuentaRecuperada = dao.findByEmail(cuenta.getEmail());
+        Contenido mensajeRecuperado = dao.findContenidosByCuenta(mensaje.getId()).get(0);
+
+        mensajeRecuperado.getComentarios().add(comentario);
+        cuentaRecuperada.getContenidos().add(comentario);
+        comentario.setCuenta(cuentaRecuperada);
         return true;
+
     }
 
 }
