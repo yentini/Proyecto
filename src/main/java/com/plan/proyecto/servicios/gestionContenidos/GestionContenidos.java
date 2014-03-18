@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package com.plan.proyecto.servicios.gestionContenidos;
 
 import com.plan.proyecto.beans.Contenido;
@@ -15,7 +14,12 @@ import java.util.List;
  * @author Administrador
  */
 public interface GestionContenidos {
-    boolean publicarContenido (Cuenta cuenta, Contenido contenido);
-    boolean eliminarContenido (Cuenta cuenta, Contenido contenido);
+
+    boolean publicarContenido(Cuenta cuenta, Contenido contenido);
+
+    boolean eliminarContenido(Cuenta cuenta, Contenido contenido);
+
     List<Contenido> mostrarContenidos(Cuenta cuenta);
+    
+    boolean publicarComentario(Cuenta cuenta, Contenido contenido, Contenido comentario);
 }

@@ -54,9 +54,12 @@ public class Cuenta implements Serializable {
 
     @OneToMany(mappedBy = "cuenta", cascade = CascadeType.ALL)
     private List<Contenido> contenidos = new ArrayList<>();
-
+    
+    @OneToMany(mappedBy = "cuenta", cascade = CascadeType.ALL)
+    private List<Contenido> comentarios = new ArrayList<>();
+    
     @OneToMany(cascade = CascadeType.ALL)
-    private List<Cuenta> amigos = new ArrayList<>();
+    private List<Cuenta> amigos = new ArrayList<>();    
 
     public Cuenta() {
     }
