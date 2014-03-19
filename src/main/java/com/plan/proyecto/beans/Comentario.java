@@ -14,7 +14,7 @@ import javax.persistence.Entity;
  * @author Administrador
  */
 @Entity
-@DiscriminatorValue("M")
+@DiscriminatorValue("C")
 public class Comentario extends Contenido {
 
     private String texto;

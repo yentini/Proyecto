@@ -15,11 +15,12 @@ import java.util.List;
  */
 public interface GestionContenidos {
 
-    boolean publicarContenido(Cuenta cuenta, Contenido contenido);
-
-    boolean eliminarContenido(Cuenta cuenta, Contenido contenido);
+    boolean publicarContenido(Cuenta cuenta, Contenido mensaje, Contenido comentario);
+    
+    boolean eliminarContenido(Cuenta cuenta, Contenido mensaje, Contenido comentario);
 
     List<Contenido> mostrarContenidos(Cuenta cuenta);
     
-    boolean publicarComentario(Cuenta cuenta, Contenido contenido, Contenido comentario);
+    
+    
 }

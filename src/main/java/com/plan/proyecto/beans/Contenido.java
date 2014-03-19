@@ -30,6 +30,7 @@ import javax.persistence.OneToMany;
 @DiscriminatorColumn(name = "TIPO_CONTENIDO")
 @NamedQueries({
     @NamedQuery(name = "Contenido.findByCuenta", query = "SELECT c FROM Contenido c WHERE c.cuenta.id = :valor")
+    
 })
 public abstract class Contenido implements Serializable {
 

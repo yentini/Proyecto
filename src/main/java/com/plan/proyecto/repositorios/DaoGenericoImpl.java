@@ -5,6 +5,8 @@
  */
 package com.plan.proyecto.repositorios;
 
+import java.lang.reflect.ParameterizedType;
+import java.lang.reflect.Type;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import org.springframework.stereotype.Repository;
@@ -21,6 +23,14 @@ public class DaoGenericoImpl<T, Long> implements DaoGenerico<T, Long> {
     @PersistenceContext
     EntityManager em;
 
+    private final Class<T> persistentClass;
+
+    public DaoGenericoImpl() {
+        Type t = getClass().getGenericSuperclass();
+        ParameterizedType pt = (ParameterizedType) t;
+        persistentClass = (Class) pt.getActualTypeArguments()[0];
+    }
+
     @Override
     public T insertar(T t) {
         em.persist(t);
@@ -33,15 +43,20 @@ public class DaoGenericoImpl<T, Long> implements DaoGenerico<T, Long> {
         em.remove(uno);
         return t;
     }
-    
-     @Override
+
+    @Override
     public void eliminarById(Long id) {
         em.remove(id);
     }
 
     @Override
-    public T modificar(T t) {        
+    public T modificar(T t) {
         return em.merge(t);
+    }
+
+    @Override
+    public T findById(Long id) {
+        return em.find(persistentClass, id);
     }
 
 }

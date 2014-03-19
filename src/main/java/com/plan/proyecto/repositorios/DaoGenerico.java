@@ -15,4 +15,5 @@ public interface DaoGenerico<T, Long> {
     T eliminar (T t);
     void eliminarById (Long id);
     T modificar (T t);
+    T findById (Long id);
 }
