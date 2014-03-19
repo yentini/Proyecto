@@ -29,7 +29,8 @@ import javax.persistence.OneToMany;
 @Inheritance
 @DiscriminatorColumn(name = "TIPO_CONTENIDO")
 @NamedQueries({
-    @NamedQuery(name = "Contenido.findByCuenta", query = "SELECT c FROM Contenido c WHERE c.cuenta.id = :valor")
+    @NamedQuery(name = "Contenido.findByCuenta", query = "SELECT c FROM Contenido c WHERE c.cuenta.id = :valor"),
+    @NamedQuery(name = "Contenido.findByComentarioId", query = "SELECT c FROM Contenido c WHERE c.comentarios.id = :valor")
     
 })
 public abstract class Contenido implements Serializable {
@@ -42,7 +43,7 @@ public abstract class Contenido implements Serializable {
     @ManyToOne
     private Cuenta cuenta;
 
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Contenido> comentarios = new ArrayList<>();
 
     public Long getId() {

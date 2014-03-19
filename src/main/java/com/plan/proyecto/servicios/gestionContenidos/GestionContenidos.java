@@ -17,7 +17,7 @@ public interface GestionContenidos {
 
     boolean publicarContenido(Cuenta cuenta, Contenido mensaje, Contenido comentario);
     
-    boolean eliminarContenido(Cuenta cuenta, Contenido mensaje, Contenido comentario);
+    boolean eliminarContenido(Contenido contenido);
 
     List<Contenido> mostrarContenidos(Cuenta cuenta);
     

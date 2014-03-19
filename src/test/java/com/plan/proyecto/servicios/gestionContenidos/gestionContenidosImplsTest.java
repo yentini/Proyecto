@@ -178,15 +178,19 @@ public class gestionContenidosImplsTest {
         Contenido mensaje = new Mensaje("Mensaje prueba");
         gc.publicarContenido(cuenta, mensaje,null);
         
+        Boolean result = true;
+        
         Contenido comentario = new Comentario("Comentario prueba1");
-        Boolean result = gc.publicarContenido(cuenta2, mensaje, comentario);
+        result = gc.publicarContenido(cuenta2, mensaje, comentario);
         
         Contenido comentario2 = new Comentario("Comentario prueba2");
         result = gc.publicarContenido(cuenta3, mensaje, comentario2);
         
-//        gc.eliminarContenido(cuenta3, mensaje, comentario2);
+//        gc.eliminarContenido(comentario2);
+//        
+        gc.eliminarContenido(comentario);
         
-        gc.eliminarContenido(cuenta, mensaje, null);
+//        gc.eliminarContenido(mensaje);
 
         Boolean expResult = true;
         assertEquals(expResult, result);

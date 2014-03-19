@@ -5,12 +5,10 @@
  */
 package com.plan.proyecto.servicios.gestionContenidos;
 
-import com.plan.proyecto.beans.Comentario;
 import com.plan.proyecto.beans.Contenido;
 import com.plan.proyecto.beans.Cuenta;
-import com.plan.proyecto.beans.Mensaje;
+import com.plan.proyecto.repositorios.DaoContenido;
 import com.plan.proyecto.repositorios.DaoCuenta;
-import com.plan.proyecto.repositorios.DaoGenerico;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -26,7 +24,10 @@ public class gestionContenidosImpls implements GestionContenidos {
 
     @Autowired
     DaoCuenta dao;
-    
+
+    @Autowired
+    DaoContenido daoG;
+
     @Override
     public boolean publicarContenido(Cuenta cuenta, Contenido mensaje, Contenido comentario) {
         if (cuenta == null) {
@@ -54,28 +55,20 @@ public class gestionContenidosImpls implements GestionContenidos {
     }
 
     @Override
-    public boolean eliminarContenido(Cuenta cuenta, Contenido mensaje, Contenido comentario) {
-        if (cuenta == null) {
+    public boolean eliminarContenido(Contenido contenido) {
+
+        if (contenido == null) {
             return false;
         }
+
+        Contenido mensaje = daoG.findByComentarioId(contenido.getId());
+
         if (mensaje == null) {
-            return false;
-        }
-
-//        Cuenta cuentaRecuperada = dao.findByEmail(cuenta.getEmail());
-          Cuenta cuentaRecuperada = dao.findById(cuenta.getId());
-
-        if (comentario == null) {
-            cuentaRecuperada.getContenidos().remove(mensaje);
-//          dao.modificar(cuenta);
+            daoG.eliminar(contenido);
             return true;
         } else {
-//            Contenido mensajeRecuperado = (Mensaje)daoGen.findById(mensaje.getId());
-//            System.out.println("XXXXXXXXXXXX " + mensajeRecuperado.getId());
-//            Contenido comentarioRecuperado = (Comentario)daoGen.findById(comentario.getId());
-//            mensajeRecuperado.getComentarios().remove(comentario);
-//            cuentaRecuperada.getContenidos().remove(comentario);
-//            comentarioRecuperado.setCuenta(null);
+            mensaje.getComentarios().remove(contenido);
+            daoG.eliminar(contenido);
             return true;
         }
     }

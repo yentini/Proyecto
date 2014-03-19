@@ -52,11 +52,8 @@ public class Cuenta implements Serializable {
     @Temporal(TemporalType.DATE)
     private Date fechaNacimiento;
 
-    @OneToMany(mappedBy = "cuenta", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "cuenta", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Contenido> contenidos = new ArrayList<>();
-    
-    @OneToMany(mappedBy = "cuenta", cascade = CascadeType.ALL)
-    private List<Contenido> comentarios = new ArrayList<>();
     
     @OneToMany(cascade = CascadeType.ALL)
     private List<Cuenta> amigos = new ArrayList<>();    

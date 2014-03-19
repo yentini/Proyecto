@@ -23,12 +23,21 @@ public class DaoGenericoImpl<T, Long> implements DaoGenerico<T, Long> {
     @PersistenceContext
     EntityManager em;
 
-    private final Class<T> persistentClass;
+    private Class<T> persistentClass;
 
+    @SuppressWarnings("unchecked")
     public DaoGenericoImpl() {
-        Type t = getClass().getGenericSuperclass();
-        ParameterizedType pt = (ParameterizedType) t;
-        persistentClass = (Class) pt.getActualTypeArguments()[0];
+//        Type t = getClass().getGenericSuperclass();
+//        ParameterizedType pt = (ParameterizedType) t;
+//        persistentClass = (Class) pt.getActualTypeArguments()[0];
+
+        Type type = this.getClass().getGenericSuperclass();
+
+        if (type instanceof ParameterizedType) {
+            ParameterizedType pt = (ParameterizedType) type;
+            Type[] fieldArgTypes = pt.getActualTypeArguments();
+            persistentClass = (Class<T>) fieldArgTypes[0];
+        }
     }
 
     @Override
