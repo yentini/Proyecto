@@ -30,8 +30,9 @@ import javax.persistence.OneToMany;
 @DiscriminatorColumn(name = "TIPO_CONTENIDO")
 @NamedQueries({
     @NamedQuery(name = "Contenido.findByCuenta", query = "SELECT c FROM Contenido c WHERE c.cuenta.id = :valor"),
-    @NamedQuery(name = "Contenido.findByComentarioId", query = "SELECT c FROM Contenido c WHERE c.comentarios.id = :valor")
-    
+    @NamedQuery(name = "Contenido.findMensajeByComentario", query = "SELECT c FROM Contenido c WHERE :valor MEMBER OF c.comentarios"),
+    @NamedQuery(name = "Contenido.findComentariosByMensaje", query = "SELECT c.comentarios FROM Contenido c WHERE c.id = :idValor")
+
 })
 public abstract class Contenido implements Serializable {
 
@@ -102,7 +103,7 @@ public abstract class Contenido implements Serializable {
 
     @Override
     public String toString() {
-        return "Contenido{" + "id=" + id + ", cuenta=" + cuenta + ", comentarios=" + comentarios + '}';
+        return "Contenido{" + "id=" + id + ", cuenta=" + cuenta.getEmail() + '}';
     }
 
 }

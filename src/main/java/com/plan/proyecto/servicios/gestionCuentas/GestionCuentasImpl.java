@@ -7,6 +7,7 @@ package com.plan.proyecto.servicios.gestionCuentas;
 
 import com.plan.proyecto.beans.Cuenta;
 import com.plan.proyecto.repositorios.DaoCuenta;
+import com.plan.proyecto.servicios.utilidades.Encriptar;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -21,40 +22,38 @@ public class GestionCuentasImpl implements GestionCuentas {
 
     @Autowired
     DaoCuenta dao;
+    
+    @Autowired
+    Encriptar encriptar;
 
     @Override
-    public Boolean AltaCuenta(Cuenta cuenta) {
+    public Cuenta AltaCuenta(Cuenta cuenta) {
 
         if (cuenta == null) {
-            return false;
+            return null;
         }
         if (!existeCuenta(cuenta)) {
-
-            Cuenta c = dao.insertar(cuenta);
-
-            if (c != null) {
-                return true;
-            }
-            return false;
+            cuenta.setPassword(encriptar.encrypt(cuenta.getPassword()));
+            return dao.insertar(cuenta);
         }
-        return false;
+        return null;
     }
 
     @Override
-    public Boolean ModificarCuenta(Cuenta cuenta) {
-        if (cuenta == null) {
-            return false;
-        }
+    public Cuenta ModificarCuenta(Cuenta cuenta) {
 
-        if (existeCuenta(cuenta)) {
-            dao.modificar(cuenta);
-            return true;
+        if (cuenta == null) {
+            return null;
         }
-        return false;
+        if (existeCuenta(cuenta)) {
+            return dao.modificar(cuenta);
+        }
+        return null;
     }
 
     @Override
     public Boolean BajaCuenta(Cuenta cuenta) {
+
         if (cuenta == null) {
             return false;
         }
@@ -68,7 +67,7 @@ public class GestionCuentasImpl implements GestionCuentas {
 
     private Boolean existeCuenta(Cuenta cuenta) {
 
-        return !dao.findByNombre(cuenta.getNombre()).isEmpty();
+        return dao.findByEmail(cuenta.getEmail()) != null;
     }
 
 }

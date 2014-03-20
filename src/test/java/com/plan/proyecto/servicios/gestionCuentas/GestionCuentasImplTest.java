@@ -5,7 +5,6 @@
  */
 package com.plan.proyecto.servicios.gestionCuentas;
 
-import com.plan.proyecto.servicios.gestionCuentas.GestionCuentas;
 import com.plan.proyecto.beans.Cuenta;
 import com.plan.proyecto.repositorios.DaoCuenta;
 import java.util.logging.Level;
@@ -30,10 +29,10 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 public class GestionCuentasImplTest {
 
     @Autowired
-    private GestionCuentas instance;
+    private GestionCuentas gestionCuentas;
 
     @Autowired
-    DaoCuenta dao;
+    DaoCuenta daoCuenta;
 
     Logger log = Logger.getLogger(GestionCuentasImplTest.class.getName());
 
@@ -56,7 +55,7 @@ public class GestionCuentasImplTest {
 
     @After
     public void tearDown() {
-        dao.limpiezaCuentas();
+        daoCuenta.limpiezaCuentas();
     }
 
     /**
@@ -65,19 +64,25 @@ public class GestionCuentasImplTest {
     @Test
     public void testAltaCuenta() {
         log.log(Level.INFO, "AltaCuenta");
-
         log.log(Level.INFO, "Prueba de inserción de usuario");
+
         Cuenta cuenta = new Cuenta();
         cuenta.setNombre("cesar");
-        Boolean expResult = true;
-        Boolean result = instance.AltaCuenta(cuenta);
-        assertEquals(expResult, result);
-        log.log(Level.INFO, "Prueba de inserción de usuario terminada");
+        cuenta.setEmail("cesaremail");
 
+        Boolean expResult = true;
+        assertNotNull(gestionCuentas.AltaCuenta(cuenta).getId());
+
+        log.log(Level.INFO, "Prueba de inserción de usuario terminada");
         log.log(Level.INFO, "Prueba de inserción de un segundo usuario repetido");
+
+        Cuenta cuenta2 = new Cuenta();
+        cuenta2.setNombre("cesar");
+        cuenta2.setEmail("cesaremail");
+
         expResult = false;
-        result = instance.AltaCuenta(cuenta);
-        assertEquals(expResult, result);
+        assertNull(gestionCuentas.AltaCuenta(cuenta2));
+
         log.log(Level.INFO, "Prueba de inserción de un segundo usuario repetido, terminada");
     }
 
@@ -87,21 +92,23 @@ public class GestionCuentasImplTest {
     @Test
     public void testModificarCuenta() {
         log.log(Level.INFO, "ModificarCuenta");
-
         log.log(Level.INFO, "Prueba de modificación de una cuenta");
         log.log(Level.INFO, "Creo una cuenta");
+
         Cuenta cuenta = new Cuenta();
         cuenta.setNombre("maria");
-        instance.AltaCuenta(cuenta);
+        cuenta.setEmail("mariaEMAIL");
+        gestionCuentas.AltaCuenta(cuenta);
 
         log.log(Level.INFO, "cuenta: " + cuenta.getApellidos());
-
         log.log(Level.INFO, "Modifico la cuenta");
-        cuenta.setApellidos("marin");
-        Boolean result = instance.ModificarCuenta(cuenta);
-        Cuenta c = dao.findByNombre("maria").get(0);
-                
-        assertTrue(c.getApellidos().equals("marin"));
+
+        String apellido = "marin";
+        cuenta.setApellidos(apellido);
+        cuenta = gestionCuentas.ModificarCuenta(cuenta);
+        assertNotNull(cuenta);
+        assertTrue(cuenta.getApellidos().equals(apellido));
+
         log.log(Level.INFO, "Prueba de inserción de un segundo usuario repetido, terminada");
     }
 
@@ -111,19 +118,19 @@ public class GestionCuentasImplTest {
     @Test
     public void testBajaCuenta() {
         log.log(Level.INFO, "BajaCuenta");
-
         log.log(Level.INFO, "Prueba de eliminación de una cuenta");
         log.log(Level.INFO, "Creo una cuenta");
+
         Cuenta cuenta = new Cuenta();
         cuenta.setNombre("antonio");
-        instance.AltaCuenta(cuenta);
+        cuenta.setEmail("antonioEmail");
 
-        log.log(Level.INFO, "cuenta: " + cuenta.toString());
+        cuenta = gestionCuentas.AltaCuenta(cuenta);
 
-        log.log(Level.INFO, "Elimino la cuenta");
-        Boolean expResult = true;
-        Boolean result = instance.BajaCuenta(cuenta);
-        assertEquals(expResult, result);
+        gestionCuentas.BajaCuenta(cuenta);
+        
+        assertNull(daoCuenta.findById(cuenta.getId()));
+        
         log.log(Level.INFO, "Prueba de inserción de un segundo usuario repetido, terminada");
     }
 }

@@ -8,6 +8,8 @@ package com.plan.proyecto.beans;
 import java.util.Objects;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 
 /**
  *
@@ -15,6 +17,9 @@ import javax.persistence.Entity;
  */
 @Entity
 @DiscriminatorValue("C")
+@NamedQueries({
+    @NamedQuery(name = "Comentario.findComentarioByCuenta", query = "SELECT m FROM Comentario m WHERE m.cuenta.id = :idValor")
+})
 public class Comentario extends Contenido {
 
     private String texto;

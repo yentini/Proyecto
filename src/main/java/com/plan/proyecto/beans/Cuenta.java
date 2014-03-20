@@ -54,9 +54,9 @@ public class Cuenta implements Serializable {
 
     @OneToMany(mappedBy = "cuenta", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Contenido> contenidos = new ArrayList<>();
-    
+
     @OneToMany(cascade = CascadeType.ALL)
-    private List<Cuenta> amigos = new ArrayList<>();    
+    private List<Cuenta> amigos = new ArrayList<>();
 
     public Cuenta() {
     }
@@ -161,7 +161,7 @@ public class Cuenta implements Serializable {
 
     @Override
     public String toString() {
-        return "Cuenta{" + "id=" + id + ", email=" + email + ", password=" + password + ", nombre=" + nombre + ", apellidos=" + apellidos + ", fechaNacimiento=" + fechaNacimiento + ", contenidos=" + contenidos + '}';
+        return "Cuenta{" + "id=" + id + ", email=" + email + ", password=" + password + ", nombre=" + nombre + ", apellidos=" + apellidos + ", fechaNacimiento=" + fechaNacimiento + '}';
     }
 
 }

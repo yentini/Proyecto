@@ -39,9 +39,9 @@ public class LoginImplTest {
 
     @Autowired
     DaoCuenta dao;
-    
+
     @Autowired
-    Encriptar encrypt;        
+    Encriptar encrypt;
 
     Logger log = Logger.getLogger(GestionCuentasImplTest.class.getName());
 
@@ -71,21 +71,26 @@ public class LoginImplTest {
     @Test
     public void testLogin() {
         log.log(Level.INFO, "Login");
-
         log.log(Level.INFO, "Prueba de login");
+
+        String password = "abc";
+        String email = "dddd@aaaaa.com";
+
         Cuenta cuenta = new Cuenta();
-        cuenta.setEmail("dddd@aaaaa.com");
-        cuenta.setPassword(encrypt.encrypt("abc"));
-        log.log(Level.INFO, "PRUEBA ENCRIPTAR " + cuenta.toString());
-        gc.AltaCuenta(cuenta);
+        cuenta.setEmail(email);
+        cuenta.setPassword(password);
+
+        cuenta = gc.AltaCuenta(cuenta);
 
         Boolean expResult = true;
-        Boolean result = gl.login(cuenta.getEmail(), cuenta.getPassword());
+        Boolean result = gl.autenticarse(email, password);
+
         assertEquals(expResult, result);
+
         log.log(Level.INFO, "Prueba de login correcto terminada");
 
         expResult = false;
-        result = gl.login("aaa", "bbb");
+        result = gl.autenticarse("aaa", "bbb");
         assertEquals(expResult, result);
         log.log(Level.INFO, "Prueba de login incorrecto terminada");
     }

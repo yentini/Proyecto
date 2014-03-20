@@ -5,8 +5,10 @@
  */
 package com.plan.proyecto.servicios.gestionContenidos;
 
+import com.plan.proyecto.beans.Comentario;
 import com.plan.proyecto.beans.Contenido;
 import com.plan.proyecto.beans.Cuenta;
+import com.plan.proyecto.beans.Mensaje;
 import java.util.List;
 
 /**
@@ -15,12 +17,14 @@ import java.util.List;
  */
 public interface GestionContenidos {
 
-    boolean publicarContenido(Cuenta cuenta, Contenido mensaje, Contenido comentario);
+    Contenido publicarContenido(Cuenta cuenta, Contenido mensaje, Contenido comentario);
     
-    boolean eliminarContenido(Contenido contenido);
+    Contenido eliminarContenido(Contenido contenido);
 
-    List<Contenido> mostrarContenidos(Cuenta cuenta);
+    List<Mensaje> mostrarMensajes(Cuenta cuenta);
     
+    List<Comentario> mostrarComentarios(Cuenta cuenta);
     
+    List<Contenido> mostrarComentarios(Contenido mensaje);
     
 }

@@ -13,7 +13,7 @@ import com.plan.proyecto.beans.Cuenta;
  * @author Administrador
  */
 public interface GestionCuentas {
-    Boolean AltaCuenta (Cuenta cuenta);
-    Boolean ModificarCuenta (Cuenta cuenta);
+    Cuenta AltaCuenta (Cuenta cuenta);
+    Cuenta ModificarCuenta (Cuenta cuenta);
     Boolean BajaCuenta (Cuenta cuenta);
 }

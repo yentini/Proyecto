@@ -19,8 +19,6 @@ public interface DaoCuenta extends DaoGenerico<Cuenta, Long> {
 
     List<Cuenta> findAll();
 
-    List<Contenido> findContenidosByCuenta(Long id);
-
     Cuenta findByEmailAndPassword(String email, String pwd);
 
     Cuenta findByEmail(String email);

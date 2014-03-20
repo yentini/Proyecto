@@ -5,7 +5,11 @@
  */
 package com.plan.proyecto.repositorios;
 
+import com.plan.proyecto.beans.Comentario;
 import com.plan.proyecto.beans.Contenido;
+import com.plan.proyecto.beans.Cuenta;
+import com.plan.proyecto.beans.Mensaje;
+import java.util.List;
 
 /**
  *
@@ -13,5 +17,14 @@ import com.plan.proyecto.beans.Contenido;
  */
 public interface DaoContenido extends DaoGenerico<Contenido, Long> {
 
-    Contenido findByComentarioId(Long id);
+    Contenido findMensajeByComentario(Contenido comentario);
+    
+    List<Comentario> findComentarioByCuenta (Cuenta cuenta);
+    
+    List<Mensaje> findMensajeByCuenta (Cuenta cuenta);
+    
+    List<Contenido> findComentariosoByMensaje (Contenido mensaje);
+    
+    List<Contenido> findContenidosByCuenta(Long id);
+    
 }

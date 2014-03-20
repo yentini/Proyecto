@@ -8,6 +8,8 @@ package com.plan.proyecto.beans;
 import java.util.Objects;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 
 /**
  *
@@ -15,6 +17,9 @@ import javax.persistence.Entity;
  */
 @Entity
 @DiscriminatorValue("M")
+@NamedQueries({
+    @NamedQuery(name = "Mensaje.findMensajeByCuenta", query = "SELECT m FROM Mensaje m WHERE m.cuenta.id = :idValor")
+})
 public class Mensaje extends Contenido {
 
     private String texto;
@@ -60,6 +65,5 @@ public class Mensaje extends Contenido {
     public String toString() {
         return "Mensaje{" + "texto=" + texto + '}';
     }
-
 
 }

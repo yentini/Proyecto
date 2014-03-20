@@ -5,7 +5,6 @@
  */
 package com.plan.proyecto.repositorios;
 
-import com.plan.proyecto.beans.Contenido;
 import com.plan.proyecto.beans.Cuenta;
 import java.util.List;
 import javax.persistence.EntityManager;
@@ -66,13 +65,6 @@ public class DaoCuentaImpl extends DaoGenericoImpl<Cuenta, Long> implements DaoC
             return null;
         }
         return lista.get(0);
-    }
-
-    @Override
-    public List<Contenido> findContenidosByCuenta(Long id) {
-        TypedQuery<Contenido> query = em.createNamedQuery("Contenido.findByCuenta", Contenido.class);
-        query.setParameter("valor", id);
-        return query.getResultList();
     }
 
     @Override

@@ -5,8 +5,10 @@
  */
 package com.plan.proyecto.servicios.gestionContenidos;
 
+import com.plan.proyecto.beans.Comentario;
 import com.plan.proyecto.beans.Contenido;
 import com.plan.proyecto.beans.Cuenta;
+import com.plan.proyecto.beans.Mensaje;
 import com.plan.proyecto.repositorios.DaoContenido;
 import com.plan.proyecto.repositorios.DaoCuenta;
 import java.util.List;
@@ -23,65 +25,99 @@ import org.springframework.transaction.annotation.Transactional;
 public class gestionContenidosImpls implements GestionContenidos {
 
     @Autowired
-    DaoCuenta dao;
+    DaoCuenta daoCuenta;
 
     @Autowired
-    DaoContenido daoG;
+    DaoContenido daoContenido;
 
     @Override
-    public boolean publicarContenido(Cuenta cuenta, Contenido mensaje, Contenido comentario) {
-        if (cuenta == null) {
-            return false;
+    public Contenido publicarContenido(Cuenta cuenta, Contenido mensaje, Contenido comentario) {
+
+        if (cuenta.getId() == null) {
+            return null;
         }
         if (mensaje == null) {
-            return false;
+            return null;
         }
 
-        Cuenta cuentaRecuperada = dao.findByEmail(cuenta.getEmail());
+        Cuenta cuentaRecuperada = daoCuenta.findById(cuenta.getId());
 
         if (comentario == null) {
             cuentaRecuperada.getContenidos().add(mensaje);
             mensaje.setCuenta(cuentaRecuperada);
-//        dao.modificar(recuperado);
-            return true;
+            return mensaje;
         } else {
-            Contenido mensajeRecuperado = dao.findContenidosByCuenta(mensaje.getId()).get(0);
+            if (mensaje.getId() == null) {
+                return null;
+            }
+            Contenido mensajeRecuperado = daoContenido.findById(mensaje.getId());
 
             mensajeRecuperado.getComentarios().add(comentario);
             cuentaRecuperada.getContenidos().add(comentario);
             comentario.setCuenta(cuentaRecuperada);
-            return true;
+            return comentario;
         }
     }
 
     @Override
-    public boolean eliminarContenido(Contenido contenido) {
+    public Contenido eliminarContenido(Contenido contenido) {
 
         if (contenido == null) {
-            return false;
+            return null;
         }
-
-        Contenido mensaje = daoG.findByComentarioId(contenido.getId());
-
-        if (mensaje == null) {
-            daoG.eliminar(contenido);
-            return true;
-        } else {
+        
+        if (contenido.getId() == null){
+            return null;
+        }
+        
+        Contenido mensaje = daoContenido.findMensajeByComentario(contenido);
+        if (mensaje != null) {
             mensaje.getComentarios().remove(contenido);
-            daoG.eliminar(contenido);
-            return true;
         }
+        daoContenido.eliminar(contenido);
+        return contenido;
     }
 
     @Override
-    public List<Contenido> mostrarContenidos(Cuenta cuenta) {
-        if (cuenta == null) {
+    public List<Mensaje> mostrarMensajes(Cuenta cuenta) {
 
+        if (cuenta == null) {
             return null;
         }
+        
+        if (cuenta.getId() == null) {
+            return null;
+        }
+        
+        return daoContenido.findMensajeByCuenta(cuenta);
+    }
 
-        Cuenta c = dao.findByNombre(cuenta.getNombre()).get(0);
-        return dao.findContenidosByCuenta(c.getId());
+    @Override
+    public List<Comentario> mostrarComentarios(Cuenta cuenta) {
+
+        if (cuenta == null) {
+            return null;
+        }
+        
+        if (cuenta.getId() == null) {
+            return null;
+        }
+        
+        return daoContenido.findComentarioByCuenta(cuenta);
+    }
+
+    @Override
+    public List<Contenido> mostrarComentarios(Contenido mensaje) {
+
+        if (mensaje == null) {
+            return null;
+        }
+        
+        if (mensaje.getId() == null) {
+            return null;
+        }
+        
+        return daoContenido.findComentariosoByMensaje(mensaje);
     }
 
 }

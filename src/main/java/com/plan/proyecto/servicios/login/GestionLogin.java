@@ -11,5 +11,5 @@ package com.plan.proyecto.servicios.login;
  * @author Administrador
  */
 public interface GestionLogin {
-    Boolean login(String email, String pwd);
+    Boolean autenticarse(String email, String pwd);
 }
