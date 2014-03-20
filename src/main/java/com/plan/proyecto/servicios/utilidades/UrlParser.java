@@ -9,14 +9,16 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import org.springframework.stereotype.Component;
 
 /**
  *
  * @author Administrador
  */
-public abstract class UrlParser {
+@Component
+public class UrlParser {
 
-    public static List<String> pullLinks(String text) {
+    public List<String> pullLinks(String text) {
         
         List<String> links = new ArrayList();
 
