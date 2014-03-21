@@ -5,6 +5,7 @@
  */
 package com.plan.proyecto.beans;
 
+import com.plan.proyecto.servicios.utilidades.UrlParser;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -20,6 +21,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
+import javax.persistence.Transient;
+import org.springframework.beans.factory.annotation.Autowired;
 
 /**
  *
@@ -41,42 +44,61 @@ public abstract class Contenido implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
+    private String texto;
+
     @ManyToOne
     private Cuenta cuenta;
 
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Contenido> comentarios = new ArrayList<>();
 
+    public String getTexto() {
+
+        return texto;
+    }
+
+    public void setTexto(String texto) {
+
+        this.texto = texto;
+    }
+
     public Long getId() {
+
         return id;
     }
 
     public void setId(Long id) {
+
         this.id = id;
     }
 
     public Cuenta getCuenta() {
+
         return cuenta;
     }
 
     public void setCuenta(Cuenta cuenta) {
+
         this.cuenta = cuenta;
     }
 
     public List<Contenido> getComentarios() {
+
         return comentarios;
     }
 
     public void setComentarios(List<Contenido> comentarios) {
+
         this.comentarios = comentarios;
     }
 
     @Override
     public int hashCode() {
-        int hash = 3;
-        hash = 47 * hash + Objects.hashCode(this.id);
-        hash = 47 * hash + Objects.hashCode(this.cuenta);
-        hash = 47 * hash + Objects.hashCode(this.comentarios);
+        int hash = 5;
+        hash = 79 * hash + Objects.hashCode(this.id);
+        hash = 79 * hash + Objects.hashCode(this.texto);
+        hash = 79 * hash + Objects.hashCode(this.cuenta);
+        hash = 79 * hash + Objects.hashCode(this.comentarios);
         return hash;
     }
 
@@ -92,18 +114,35 @@ public abstract class Contenido implements Serializable {
         if (!Objects.equals(this.id, other.id)) {
             return false;
         }
-        if (!Objects.equals(this.cuenta, other.cuenta)) {
+        if (!Objects.equals(this.texto, other.texto)) {
             return false;
         }
-        if (!Objects.equals(this.comentarios, other.comentarios)) {
+        if (!Objects.equals(this.cuenta, other.cuenta)) {
             return false;
         }
         return true;
     }
 
+    public void actualizarTextoEnlaces() {
+
+        setTexto(actualizarEnlaces(getTexto()));
+    }
+
+    private String actualizarEnlaces(String texto) {
+
+        List<String> result = UrlParser.pullLinks(texto);
+
+        for (String enlace : result) {
+            texto = texto.replace(enlace, "<A href='" + enlace + "'/>");
+        }
+
+        return texto;
+    }
+
     @Override
     public String toString() {
-        return "Contenido{" + "id=" + id + ", cuenta=" + cuenta.getEmail() + '}';
+
+        return "Contenido{" + "id=" + id + ", texto=" + texto + ", cuenta=" + cuenta + '}';
     }
 
 }

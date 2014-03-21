@@ -11,6 +11,7 @@ import com.plan.proyecto.beans.Cuenta;
 import com.plan.proyecto.beans.Mensaje;
 import com.plan.proyecto.repositorios.DaoContenido;
 import com.plan.proyecto.repositorios.DaoCuenta;
+import com.plan.proyecto.servicios.utilidades.UrlParser;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -65,11 +66,11 @@ public class gestionContenidosImpls implements GestionContenidos {
         if (contenido == null) {
             return null;
         }
-        
-        if (contenido.getId() == null){
+
+        if (contenido.getId() == null) {
             return null;
         }
-        
+
         Contenido mensaje = daoContenido.findMensajeByComentario(contenido);
         if (mensaje != null) {
             mensaje.getComentarios().remove(contenido);
@@ -84,12 +85,12 @@ public class gestionContenidosImpls implements GestionContenidos {
         if (cuenta == null) {
             return null;
         }
-        
+
         if (cuenta.getId() == null) {
             return null;
         }
-        
-        return daoContenido.findMensajeByCuenta(cuenta);
+
+        return actualizarEnlacesMensajes(daoContenido.findMensajeByCuenta(cuenta));
     }
 
     @Override
@@ -98,12 +99,13 @@ public class gestionContenidosImpls implements GestionContenidos {
         if (cuenta == null) {
             return null;
         }
-        
+
         if (cuenta.getId() == null) {
             return null;
         }
-        
-        return daoContenido.findComentarioByCuenta(cuenta);
+
+        return actualizarEnlacesComentarios(daoContenido.findComentarioByCuenta(cuenta));
+
     }
 
     @Override
@@ -112,12 +114,39 @@ public class gestionContenidosImpls implements GestionContenidos {
         if (mensaje == null) {
             return null;
         }
-        
+
         if (mensaje.getId() == null) {
             return null;
         }
-        
-        return daoContenido.findComentariosoByMensaje(mensaje);
+
+        return actualizarEnlacesContenidos(daoContenido.findComentariosoByMensaje(mensaje));
+    }
+
+    private List<Mensaje> actualizarEnlacesMensajes(List<Mensaje> mensajes) {
+
+        for (Mensaje mensaje : mensajes) {
+            mensaje.actualizarTextoEnlaces();;
+        }
+
+        return mensajes;
+    }
+
+    private List<Comentario> actualizarEnlacesComentarios(List<Comentario> comentarios) {
+
+        for (Comentario comentario : comentarios) {
+            comentario.actualizarTextoEnlaces();
+        }
+
+        return comentarios;
+    }
+
+    private List<Contenido> actualizarEnlacesContenidos(List<Contenido> comentarios) {
+
+        for (Contenido comentario : comentarios) {
+            comentario.actualizarTextoEnlaces();
+        }
+
+        return comentarios;
     }
 
 }

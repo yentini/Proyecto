@@ -126,9 +126,9 @@ public class gestionContenidosImplsTest {
 
         mensaje = gestionContenidos.publicarContenido(cuenta, mensaje, null);
         comentario = gestionContenidos.publicarContenido(cuenta2, mensaje, comentario);
-
+        
         gestionContenidos.eliminarContenido(comentario);
-
+        
         assertNull(daoContenido.findById(comentario.getId()));
 
         log.log(Level.INFO, "Prueba de eliminación de un comentario, terminada");
@@ -174,7 +174,7 @@ public class gestionContenidosImplsTest {
         cuenta3.setEmail("piedademail");
         gestionCuentas.AltaCuenta(cuenta3);
 
-        Contenido mensaje = new Mensaje("Mensaje prueba");
+        Contenido mensaje = new Mensaje("visita: www.as.com");
         gestionContenidos.publicarContenido(cuenta, mensaje, null);
 
         Contenido comentario = new Comentario("Comentario prueba1");
@@ -194,7 +194,7 @@ public class gestionContenidosImplsTest {
 
         List<Contenido> listaComentariosMensaje = gestionContenidos.mostrarComentarios(mensaje);
         assertEquals(listaComentariosMensaje.size(), resultInt);
-       
+
         log.log(Level.INFO, "Prueba de mostrar contenidos, terminada");
     }
 }

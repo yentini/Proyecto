@@ -16,9 +16,9 @@ import org.springframework.stereotype.Component;
  * @author Administrador
  */
 @Component
-public class UrlParser {
+public abstract class UrlParser {
 
-    public List<String> pullLinks(String text) {
+    public static List<String> pullLinks(String text) {
         
         List<String> links = new ArrayList();
 

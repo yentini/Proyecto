@@ -13,9 +13,9 @@ import java.util.List;
  * @author Administrador
  */
 public interface GestionRelaciones {
-
-    List<Cuenta> mostrarCuentasSistema();
-
+   
+    List<Cuenta> amigosPotenciales(Cuenta origen);
+    
     List<Cuenta> hacerAmigos(Cuenta origen, Cuenta... amigos);
     
     List<Cuenta> quitarAmigos(Cuenta origen, Cuenta... amigos);

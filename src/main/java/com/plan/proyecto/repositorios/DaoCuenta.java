@@ -29,4 +29,6 @@ public interface DaoCuenta extends DaoGenerico<Cuenta, Long> {
     
     List<Cuenta> findAmigosByCuenta(Cuenta cuenta);
     
+    List<Cuenta> findAmigosPotencialesByCuenta(Cuenta cuenta);
+    
 }

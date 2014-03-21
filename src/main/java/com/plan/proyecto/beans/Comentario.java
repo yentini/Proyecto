@@ -5,7 +5,6 @@
  */
 package com.plan.proyecto.beans;
 
-import java.util.Objects;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.NamedQueries;
@@ -22,48 +21,16 @@ import javax.persistence.NamedQuery;
 })
 public class Comentario extends Contenido {
 
-    private String texto;
-
     public Comentario() {
     }
 
     public Comentario(String texto) {
-        this.texto = texto;
-    }
-
-    public String getTexto() {
-        return texto;
-    }
-
-    public void setTexto(String texto) {
-        this.texto = texto;
-    }
-
-    @Override
-    public int hashCode() {
-        int hash = 3;
-        hash = 29 * hash + Objects.hashCode(this.texto);
-        return hash;
-    }
-
-    @Override
-    public boolean equals(Object obj) {
-        if (obj == null) {
-            return false;
-        }
-        if (getClass() != obj.getClass()) {
-            return false;
-        }
-        final Comentario other = (Comentario) obj;
-        if (!Objects.equals(this.texto, other.texto)) {
-            return false;
-        }
-        return true;
+        setTexto(texto);
     }
 
     @Override
     public String toString() {
-        return "Comentario{" + "texto=" + texto + '}';
+        return "Comentario{" + "texto=" + getTexto() + '}';
     }
-
+    
 }

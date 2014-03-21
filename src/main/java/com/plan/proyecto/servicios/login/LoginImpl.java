@@ -7,6 +7,7 @@ package com.plan.proyecto.servicios.login;
 
 import com.plan.proyecto.beans.Cuenta;
 import com.plan.proyecto.repositorios.DaoCuenta;
+import com.plan.proyecto.servicios.gestionCuentas.GestionCuentas;
 import com.plan.proyecto.servicios.gestionRelaciones.GestionRelaciones;
 import com.plan.proyecto.servicios.utilidades.Encriptar;
 import java.util.List;
@@ -25,6 +26,9 @@ public class LoginImpl implements GestionLogin {
 
     @Autowired
     GestionRelaciones gestionRelaciones;
+    
+    @Autowired
+    GestionCuentas gestionCuentas;
 
     @Autowired
     Encriptar encriptar;
@@ -32,7 +36,7 @@ public class LoginImpl implements GestionLogin {
     @Override
     public Boolean autenticarse(String email, String pwd) {
 
-        List<Cuenta> cuentasSistema = gestionRelaciones.mostrarCuentasSistema();
+        List<Cuenta> cuentasSistema = gestionCuentas.mostrarCuentasSistema();
 
         for (Cuenta cuenta : cuentasSistema) {
             if (cuenta.getEmail().equals(email)

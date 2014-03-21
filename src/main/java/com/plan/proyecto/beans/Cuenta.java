@@ -32,7 +32,9 @@ import javax.persistence.TemporalType;
     @NamedQuery(name = "Cuenta.findAll", query = "SELECT c FROM Cuenta c"),
     @NamedQuery(name = "Cuenta.findByEmail", query = "SELECT c FROM Cuenta c WHERE c.email = :valor"),
     @NamedQuery(name = "Cuenta.findAmigos", query = "SELECT c FROM Cuenta c WHERE c.id = :idorigen and :idamigo MEMBER OF c.amigos"),
-    @NamedQuery(name = "Cuenta.findAmigosByCuenta", query = "SELECT c.amigos FROM Cuenta c WHERE c.id = :idorigen")
+    @NamedQuery(name = "Cuenta.findAmigosByCuenta", query = "SELECT c.amigos FROM Cuenta c WHERE c.id = :idorigen"),
+    //@NamedQuery(name = "Cuenta.findAmigosPotencialesByCuenta", query = "SELECT c FROM Cuenta AS c WHERE c MEMBER OF (SELECT p.amigos FROM Cuenta AS p WHERE p.id = :idorigen)")
+    
 })
 public class Cuenta implements Serializable {
 

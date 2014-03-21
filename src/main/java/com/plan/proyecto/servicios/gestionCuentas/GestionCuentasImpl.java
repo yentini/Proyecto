@@ -8,6 +8,7 @@ package com.plan.proyecto.servicios.gestionCuentas;
 import com.plan.proyecto.beans.Cuenta;
 import com.plan.proyecto.repositorios.DaoCuenta;
 import com.plan.proyecto.servicios.utilidades.Encriptar;
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -22,9 +23,14 @@ public class GestionCuentasImpl implements GestionCuentas {
 
     @Autowired
     DaoCuenta dao;
-    
+
     @Autowired
     Encriptar encriptar;
+
+    @Override
+    public List<Cuenta> mostrarCuentasSistema() {
+        return dao.findAll();
+    }
 
     @Override
     public Cuenta AltaCuenta(Cuenta cuenta) {
