@@ -92,10 +92,17 @@ public class DaoCuentaImpl extends DaoGenericoImpl<Cuenta, Long> implements DaoC
 
     @Override
     public List<Cuenta> findAmigosPotencialesByCuenta(Cuenta cuenta) {
-        Query query = em.createQuery("SELECT c FROM Cuenta c WHERE c MEMBER OF (SELECT p.amigos FROM Cuenta p WHERE p.id = :idorigen)");
-       
-        query.setParameter("idorigen", cuenta.getId());
+//        Query query = em.createNamedQuery("Cuenta.findAmigosPotencialesByCuenta",Cuenta.class);       
+//        query.setParameter("idorigen", cuenta.getId());
+               
+        List<Cuenta> amigos = findAmigosByCuenta(cuenta);
         
-        return query.getResultList();
+        List<Cuenta> usuarios = findAll();
+        
+        usuarios.remove(cuenta);
+                
+        usuarios.removeAll(amigos);
+                
+        return usuarios;
     }
 }
