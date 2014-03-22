@@ -30,9 +30,6 @@ public class LoginImpl implements GestionLogin {
     @Autowired
     GestionCuentas gestionCuentas;
 
-    @Autowired
-    Encriptar encriptar;
-
     @Override
     public Boolean autenticarse(String email, String pwd) {
 
@@ -40,7 +37,7 @@ public class LoginImpl implements GestionLogin {
 
         for (Cuenta cuenta : cuentasSistema) {
             if (cuenta.getEmail().equals(email)
-                    && encriptar.decrypt(cuenta.getPassword()).equals(pwd)) {
+                    && Encriptar.decrypt(cuenta.getPassword()).equals(pwd)) {
                 return true;
             }
         }

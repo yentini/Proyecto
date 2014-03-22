@@ -35,16 +35,15 @@ public class AltaControlador {
 
     @RequestMapping(method = RequestMethod.GET)
     public void tratarGet() {
-
     }
 
     @RequestMapping(method = RequestMethod.POST)
     public String tratarPost(@ModelAttribute("cuenta") Cuenta cuenta) {
-        log.log(Level.INFO, "LLegamos");
-        if (gc.AltaCuenta(cuenta)!=null) {
-            log.log(Level.INFO, "Entramos");
-            return "muro";
-        }
+//        log.log(Level.INFO, "LLegamos");
+//        if (gc.AltaCuenta(cuenta)!=null) {
+//            log.log(Level.INFO, "Entramos");
+//            return "muro";
+//        }
         return "alta";
     }
 }

@@ -9,7 +9,6 @@ import com.plan.proyecto.beans.Cuenta;
 import com.plan.proyecto.repositorios.DaoCuenta;
 import com.plan.proyecto.servicios.gestionCuentas.GestionCuentasImplTest;
 import com.plan.proyecto.servicios.gestionCuentas.GestionCuentas;
-import com.plan.proyecto.servicios.utilidades.Encriptar;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.junit.After;
@@ -39,9 +38,6 @@ public class LoginImplTest {
 
     @Autowired
     DaoCuenta dao;
-
-    @Autowired
-    Encriptar encrypt;
 
     Logger log = Logger.getLogger(GestionCuentasImplTest.class.getName());
 

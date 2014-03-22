@@ -24,9 +24,6 @@ public class GestionCuentasImpl implements GestionCuentas {
     @Autowired
     DaoCuenta dao;
 
-    @Autowired
-    Encriptar encriptar;
-
     @Override
     public List<Cuenta> mostrarCuentasSistema() {
         return dao.findAll();
@@ -39,7 +36,7 @@ public class GestionCuentasImpl implements GestionCuentas {
             return null;
         }
         if (!existeCuenta(cuenta)) {
-            cuenta.setPassword(encriptar.encrypt(cuenta.getPassword()));
+            cuenta.setPassword(Encriptar.encrypt(cuenta.getPassword()));
             return dao.insertar(cuenta);
         }
         return null;

@@ -5,38 +5,37 @@
  */
 package com.plan.proyecto.servicios.utilidades;
 
-import java.util.logging.Logger;
 import org.jasypt.encryption.pbe.StandardPBEStringEncryptor;
 import org.springframework.beans.factory.annotation.Value;
-
 import org.springframework.stereotype.Component;
+
 
 /**
  *
  * @author Administrador
  */
 @Component
-public class Encriptar {
+public abstract class Encriptar {
 
-    @Value("${claveEncrypt}")
-//    @Value("#{systemProperties['constantes.claveEncrypt']}")
+//    @Value("${claveEncrypt}")
+    @Value("#{systemProperties['constantes.claveEncrypt']}")
 //    @Value("#{constantes['claveEncrypt']}")  
-    private String claveEncrypt;
+//    @Value("#{constantes.claveEncrypt}")  
+    private static final String claveEncrypt = "cursoJava";
 
-    private Logger log = Logger.getLogger(Encriptar.class.getName());
+//    private Logger log = Logger.getLogger(Encriptar.class.getName());
 
-    public String encrypt(String cadena, String clave) {
+    public static String encrypt(String cadena, String clave) {
         StandardPBEStringEncryptor s = new StandardPBEStringEncryptor();
         s.setPassword(clave);
-        String temporal = s.encrypt(cadena);
         return s.encrypt(cadena);
     }
 
-    public String encrypt(String cadena) {
+    public static String encrypt(String cadena) {
         return encrypt(cadena, claveEncrypt);
     }
 
-    public String decrypt(String cadena, String clave) {
+    public static String decrypt(String cadena, String clave) {
         StandardPBEStringEncryptor s = new StandardPBEStringEncryptor();
         s.setPassword(clave);
         String devuelve = "";
@@ -47,7 +46,7 @@ public class Encriptar {
         return devuelve;
     }
 
-    public String decrypt(String cadena) {
+    public static String decrypt(String cadena) {
         return decrypt(cadena, claveEncrypt);
     }
 

@@ -2,10 +2,18 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
-"http://www.w3.org/TR/html4/loose.dtd">
+    "http://www.w3.org/TR/html4/loose.dtd">
 
 <html>
     <head>
+        <script src="js/utilidades.js"></script>
+        <script src="js/jquery-1.11.0.js"></script>
+        <script src="js/jquery-ui/jquery-ui.min.js"></script>
+        <script>
+            $(document).ready(function() {
+                $("#fechaNacimiento").datepicker();
+            });
+        </script>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Alta de nuevas cuentas</title>
     </head>
@@ -34,7 +42,7 @@
                 <tr>
                     <td>Fecha de nacimiento:</td>
                     <td>                        
-                        <form:input path="fechaNacimiento"/>
+                        <form:input id="fechaNacimiento" path="fechaNacimiento"/>
                     </td>
                     <td>
                         <form:errors path="fechaNacimiento"/>
