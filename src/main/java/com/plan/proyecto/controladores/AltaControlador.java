@@ -20,11 +20,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
  * @author Administrador
  */
 @Controller
-@RequestMapping("/alta.html")
+@RequestMapping(value = {"/alta.html","/formularioLogin.html","/formularioAlta.html"})
 public class AltaControlador {
-
-    Logger log = Logger.getLogger(AltaControlador.class.getName());
-
+    
     @Autowired
     GestionCuentas gc;
 
@@ -39,11 +37,11 @@ public class AltaControlador {
 
     @RequestMapping(method = RequestMethod.POST)
     public String tratarPost(@ModelAttribute("cuenta") Cuenta cuenta) {
-//        log.log(Level.INFO, "LLegamos");
+       
 //        if (gc.AltaCuenta(cuenta)!=null) {
 //            log.log(Level.INFO, "Entramos");
 //            return "muro";
 //        }
-        return "alta";
+        return "muro";
     }
 }

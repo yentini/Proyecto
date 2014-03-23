@@ -3,11 +3,6 @@ $(document).ready(function() {
         changeMonth: true,
         changeYear: true
     });
-
-    jQuery.validator.setDefaults({
-        debug: true,
-        success: "valid"
-    });
     
     $("#login").validate({
         rules: {
@@ -17,6 +12,7 @@ $(document).ready(function() {
             }
         }
     });
+    
     $("#alta").validate({        
         rules: {
             email: {

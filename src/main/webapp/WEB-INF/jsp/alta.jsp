@@ -17,7 +17,7 @@
     </head>
     <body>
         <h1>EWALL</h3>
-        <form:form id="login" commandName="cuenta">
+            <form:form id="login" action="formularioLogin.html" commandName="cuenta">
             <table>                      
                 <th><h2>Login</h2></th>
                 <tr>
@@ -46,11 +46,11 @@
             </table>
         </form:form>
 
-        <form:form id="alta" commandName="cuenta">
+        <form:form id="alta" action="formularioAlta.html" commandName="cuenta">
             <table>
                 <th><h2>Regístrate</h2></th>
                 <tr>
-                    <td>Nombre de usuario:</td>
+                    <td>Nombre:</td>
                     <td>
                         <form:input path="nombre"/>
                     </td>
@@ -77,7 +77,7 @@
                     </td>
                 </tr>
                 <tr>
-                    <td>Email:</td>
+                    <td>Correo electrónico:</td>
                     <td>
                         <form:input id="emailAlta" name="emailAlta" path="email"/>
                     </td>
@@ -86,7 +86,7 @@
                     </td>
                 </tr>
                 <tr>
-                    <td>Vuelve a introducir el email:</td>
+                    <td>Vuelve a introducir el correo:</td>
                     <td>
                         <input name="email_again"/>
                     </td>
@@ -110,5 +110,5 @@
                 </tr>
             </table>
         </form:form>
-    </body>
+</body>
 </html>
