@@ -16,13 +16,14 @@
         <title>Alta de nuevas cuentas</title>
     </head>
     <body>
+        <h1>EWALL</h3>
         <form:form id="login" commandName="cuenta">
             <table>                      
                 <th><h2>Login</h2></th>
                 <tr>
                     <td>Email:</td>
                     <td>
-                        <form:input id="email" name="email" path="email"/>
+                        <form:input path="email"/>
                     </td>
                     <td>
                         <form:errors path="email"/>
@@ -45,9 +46,9 @@
             </table>
         </form:form>
 
-        <form:form commandName="cuenta">
+        <form:form id="alta" commandName="cuenta">
             <table>
-                <th><h2>Formulario de alta para EWallBook</h2></th>
+                <th><h2>Regístrate</h2></th>
                 <tr>
                     <td>Nombre de usuario:</td>
                     <td>
@@ -78,21 +79,30 @@
                 <tr>
                     <td>Email:</td>
                     <td>
-                        <form:input path="email"/>
+                        <form:input id="emailAlta" name="emailAlta" path="email"/>
                     </td>
                     <td>
                         <form:errors path="email"/>
                     </td>
                 </tr>
                 <tr>
+                    <td>Vuelve a introducir el email:</td>
+                    <td>
+                        <input name="email_again"/>
+                    </td>
+                    <td>
+                        <form:errors id="email_again"/>
+                    </td>
+                </tr>
+                <tr>
                     <td>Contraseña:</td>
                     <td>
-                        <form:password path="password"/>
+                        <form:password id="password" name="password" path="password"/>
                     </td>
                     <td>
                         <form:errors path="password"/>
                     </td>
-                </tr>
+                </tr>                
                 <tr>
                     <td colspan="3">
                         <input type="submit" value="Continuar"/>
