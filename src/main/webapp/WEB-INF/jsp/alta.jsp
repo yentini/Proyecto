@@ -17,7 +17,7 @@
     </head>
     <body>
         <h1>EWALL</h3>
-            <form:form id="login" action="formularioLogin.html" commandName="cuenta">
+            <form:form id="login" action="formularioLogin.html" commandName="cuentaLogin">
             <table>                      
                 <th><h2>Login</h2></th>
                 <tr>
@@ -45,8 +45,10 @@
                 </tr>
             </table>
         </form:form>
-
-        <form:form id="alta" action="formularioAlta.html" commandName="cuenta">
+        
+        <div><h3>${mensajeLogin}</h3></div>
+        
+        <form:form id="alta" action="formularioAlta.html" commandName="cuentaAlta">
             <table>
                 <th><h2>Regístrate</h2></th>
                 <tr>
@@ -110,5 +112,7 @@
                 </tr>
             </table>
         </form:form>
+        
+        <div><h3>${mensajeAlta}</h3></div>
 </body>
 </html>

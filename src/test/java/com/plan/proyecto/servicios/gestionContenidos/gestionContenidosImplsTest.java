@@ -13,6 +13,7 @@ import com.plan.proyecto.repositorios.DaoContenido;
 import com.plan.proyecto.repositorios.DaoCuenta;
 import com.plan.proyecto.servicios.gestionCuentas.GestionCuentas;
 import com.plan.proyecto.servicios.gestionCuentas.GestionCuentasImplTest;
+import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -78,9 +79,12 @@ public class gestionContenidosImplsTest {
         log.log(Level.INFO, "Publicar Contenidos");
         log.log(Level.INFO, "Prueba de publicación de contenidos");
 
-        Cuenta cuenta = new Cuenta();
-        cuenta.setNombre("cesar");
-        cuenta.setEmail("miemail");
+        String password = "abcd";
+        String email = "adddd@aaaaa.com";
+        String nombre = "cesar";
+        Date fecha = new Date();
+
+        Cuenta cuenta = new Cuenta(email, password, nombre, fecha);
         gestionCuentas.AltaCuenta(cuenta);
 
         Contenido mensaje = new Mensaje("Texto prueba");
@@ -90,9 +94,12 @@ public class gestionContenidosImplsTest {
         assertNotNull(mensaje.getId());
         log.log(Level.INFO, "Prueba de inserción de un mensaje, terminada");
 
-        Cuenta cuenta2 = new Cuenta();
-        cuenta2.setNombre("Jaime");
-        cuenta2.setEmail("Jaimeemail");
+        password = "abcd";
+        email = "badddd@aaaaa.com";
+        nombre = "cesar";
+        fecha = new Date();
+
+        Cuenta cuenta2 = new Cuenta(email, password, nombre, fecha);
         gestionCuentas.AltaCuenta(cuenta2);
 
         Contenido comentario = new Comentario("comentario prueba");
@@ -111,14 +118,20 @@ public class gestionContenidosImplsTest {
         log.log(Level.INFO, "Eliminar contenidos");
         log.log(Level.INFO, "Prueba de eliminación de contenidos");
 
-        Cuenta cuenta = new Cuenta();
-        cuenta.setNombre("cesar");
-        cuenta.setEmail("miemail");
+        String password = "abcd";
+        String email = "adddd@aaaaa.com";
+        String nombre = "cesar";
+        Date fecha = new Date();
+
+        Cuenta cuenta = new Cuenta(email, password, nombre, fecha);
         gestionCuentas.AltaCuenta(cuenta);
 
-        Cuenta cuenta2 = new Cuenta();
-        cuenta2.setNombre("Jaime");
-        cuenta2.setEmail("Jaimeemail");
+        password = "abcd";
+        email = "agdddd@aaaaa.com";
+        nombre = "cesar";
+        fecha = new Date();
+
+        Cuenta cuenta2 = new Cuenta(email, password, nombre, fecha);
         gestionCuentas.AltaCuenta(cuenta2);
 
         Contenido mensaje = new Mensaje("Texto prueba");
@@ -126,9 +139,9 @@ public class gestionContenidosImplsTest {
 
         mensaje = gestionContenidos.publicarContenido(cuenta, mensaje, null);
         comentario = gestionContenidos.publicarContenido(cuenta2, mensaje, comentario);
-        
+
         gestionContenidos.eliminarContenido(comentario);
-        
+
         assertNull(daoContenido.findById(comentario.getId()));
 
         log.log(Level.INFO, "Prueba de eliminación de un comentario, terminada");
@@ -159,19 +172,28 @@ public class gestionContenidosImplsTest {
         log.log(Level.INFO, "Publicar comentario");
         log.log(Level.INFO, "Prueba de publicación de un comentario");
 
-        Cuenta cuenta = new Cuenta();
-        cuenta.setNombre("Cesar");
-        cuenta.setEmail("cesaremail");
+        String password = "abcd";
+        String email = "badddd@aaaaa.com";
+        String nombre = "cesar";
+        Date fecha = new Date();
+
+        Cuenta cuenta = new Cuenta(email, password, nombre, fecha);
         gestionCuentas.AltaCuenta(cuenta);
 
-        Cuenta cuenta2 = new Cuenta();
-        cuenta2.setNombre("Antonio");
-        cuenta2.setEmail("antonioemail");
+        password = "abcd";
+        email = "addddd@aaaaa.com";
+        nombre = "cesar";
+        fecha = new Date();
+
+        Cuenta cuenta2 = new Cuenta(email, password, nombre, fecha);
         gestionCuentas.AltaCuenta(cuenta2);
 
-        Cuenta cuenta3 = new Cuenta();
-        cuenta3.setNombre("Piedad");
-        cuenta3.setEmail("piedademail");
+        password = "abcd";
+        email = "addsdd@aaaaa.com";
+        nombre = "cesar";
+        fecha = new Date();
+
+        Cuenta cuenta3 = new Cuenta(email, password, nombre, fecha);
         gestionCuentas.AltaCuenta(cuenta3);
 
         Contenido mensaje = new Mensaje("visita: www.as.com");

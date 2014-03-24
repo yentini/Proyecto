@@ -68,9 +68,14 @@ public class GestionCuentasImpl implements GestionCuentas {
         return false;
     }
 
-    private Boolean existeCuenta(Cuenta cuenta) {
+    public Boolean existeCuenta(Cuenta cuenta) {
 
         return dao.findByEmail(cuenta.getEmail()) != null;
+    }
+
+    @Override
+    public Cuenta devolverCuenta(Long id) {
+        return dao.findById(id);
     }
 
 }

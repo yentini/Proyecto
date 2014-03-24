@@ -7,6 +7,7 @@ package com.plan.proyecto.servicios.gestionCuentas;
 
 import com.plan.proyecto.beans.Cuenta;
 import com.plan.proyecto.repositorios.DaoCuenta;
+import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.junit.After;
@@ -66,9 +67,12 @@ public class GestionCuentasImplTest {
         log.log(Level.INFO, "AltaCuenta");
         log.log(Level.INFO, "Prueba de inserción de usuario");
 
-        Cuenta cuenta = new Cuenta();
-        cuenta.setNombre("cesar");
-        cuenta.setEmail("cesaremail");
+        String password = "abcd";
+        String email = "adddd@aaaaa.com";
+        String nombre = "cesar";
+        Date fecha = new Date();
+
+        Cuenta cuenta = new Cuenta(email, password, nombre, fecha);
 
         Boolean expResult = true;
         assertNotNull(gestionCuentas.AltaCuenta(cuenta).getId());
@@ -76,9 +80,12 @@ public class GestionCuentasImplTest {
         log.log(Level.INFO, "Prueba de inserción de usuario terminada");
         log.log(Level.INFO, "Prueba de inserción de un segundo usuario repetido");
 
-        Cuenta cuenta2 = new Cuenta();
-        cuenta2.setNombre("cesar");
-        cuenta2.setEmail("cesaremail");
+        password = "abcd";
+        email = "adddd@aaaaa.com";
+        nombre = "cesar";
+        fecha = new Date();
+
+        Cuenta cuenta2 = new Cuenta(email, password, nombre, fecha);
 
         expResult = false;
         assertNull(gestionCuentas.AltaCuenta(cuenta2));
@@ -95,9 +102,13 @@ public class GestionCuentasImplTest {
         log.log(Level.INFO, "Prueba de modificación de una cuenta");
         log.log(Level.INFO, "Creo una cuenta");
 
-        Cuenta cuenta = new Cuenta();
-        cuenta.setNombre("maria");
-        cuenta.setEmail("mariaEMAIL");
+        String password = "abcd";
+        String email = "adddd@aaaaa.com";
+        String nombre = "cesar";
+        Date fecha = new Date();
+
+        Cuenta cuenta = new Cuenta(email, password, nombre, fecha);
+
         gestionCuentas.AltaCuenta(cuenta);
 
         log.log(Level.INFO, "cuenta: " + cuenta.getApellidos());
@@ -121,16 +132,19 @@ public class GestionCuentasImplTest {
         log.log(Level.INFO, "Prueba de eliminación de una cuenta");
         log.log(Level.INFO, "Creo una cuenta");
 
-        Cuenta cuenta = new Cuenta();
-        cuenta.setNombre("antonio");
-        cuenta.setEmail("antonioEmail");
+        String password = "abcd";
+        String email = "adddd@aaaaa.com";
+        String nombre = "cesar";
+        Date fecha = new Date();
+
+        Cuenta cuenta = new Cuenta(email, password, nombre, fecha);
 
         cuenta = gestionCuentas.AltaCuenta(cuenta);
 
         gestionCuentas.BajaCuenta(cuenta);
-        
+
         assertNull(daoCuenta.findById(cuenta.getId()));
-        
+
         log.log(Level.INFO, "Prueba de inserción de un segundo usuario repetido, terminada");
     }
 }

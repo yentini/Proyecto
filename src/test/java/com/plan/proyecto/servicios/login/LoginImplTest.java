@@ -9,6 +9,7 @@ import com.plan.proyecto.beans.Cuenta;
 import com.plan.proyecto.repositorios.DaoCuenta;
 import com.plan.proyecto.servicios.gestionCuentas.GestionCuentasImplTest;
 import com.plan.proyecto.servicios.gestionCuentas.GestionCuentas;
+import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.junit.After;
@@ -69,25 +70,25 @@ public class LoginImplTest {
         log.log(Level.INFO, "Login");
         log.log(Level.INFO, "Prueba de login");
 
-        String password = "abc";
+        String password = "abcd";
         String email = "dddd@aaaaa.com";
+        String nombre = "cesar";
+        Date fecha = new Date();
 
-        Cuenta cuenta = new Cuenta();
+        Cuenta cuenta = new Cuenta(email, password, nombre, fecha);
         cuenta.setEmail(email);
         cuenta.setPassword(password);
 
         cuenta = gc.AltaCuenta(cuenta);
 
-        Boolean expResult = true;
-        Boolean result = gl.autenticarse(email, password);
+        Cuenta result = gl.autenticarse(email, password);
 
-        assertEquals(expResult, result);
+        assertNotNull(result);
 
         log.log(Level.INFO, "Prueba de login correcto terminada");
 
-        expResult = false;
         result = gl.autenticarse("aaa", "bbb");
-        assertEquals(expResult, result);
+        assertNull(result);
         log.log(Level.INFO, "Prueba de login incorrecto terminada");
     }
 

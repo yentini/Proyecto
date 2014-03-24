@@ -8,6 +8,7 @@ package com.plan.proyecto.servicios.gestionRelaciones;
 import com.plan.proyecto.beans.Cuenta;
 import com.plan.proyecto.repositorios.DaoCuenta;
 import com.plan.proyecto.servicios.gestionCuentas.GestionCuentas;
+import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -70,9 +71,14 @@ public class GestionRelacionesImplTest {
 
         log.log(Level.INFO, "Prueba de mostrar cuentas");
 
-        Cuenta cuenta = new Cuenta();
-        cuenta.setNombre("antonio");
-        cuenta.setEmail("antonioemail");
+       
+        String password = "abcd";
+        String email = "adddd@aaaaa.com";
+        String nombre = "cesar";
+        Date fecha = new Date();
+
+        Cuenta cuenta = new Cuenta(email, password, nombre, fecha);
+        
         gc.AltaCuenta(cuenta);
 
         List<Cuenta> cuentas = gc.mostrarCuentasSistema();
@@ -93,8 +99,20 @@ public class GestionRelacionesImplTest {
     @Test
     public void testHacerAmigos() {
         System.out.println("sonAmigos");
-        Cuenta origen = new Cuenta("email1", "pwd1");
-        Cuenta destino = new Cuenta("email2", "pwd2");
+        
+        String password = "abcd";
+        String email = "adddd@aaaaa.com";
+        String nombre = "cesar";
+        Date fecha = new Date();
+
+        Cuenta origen = new Cuenta(email, password, nombre, fecha);
+        
+         password = "abcd";
+         email = "bdddd@aaaaa.com";
+         nombre = "cesar";
+         fecha = new Date();
+
+        Cuenta destino = new Cuenta(email, password, nombre, fecha);
 
         gc.AltaCuenta(origen);
         gc.AltaCuenta(destino);
@@ -110,10 +128,28 @@ public class GestionRelacionesImplTest {
      */
     @Test
     public void testSonAmigos() {
-        System.out.println("sonAmigos");
-        Cuenta origen = new Cuenta("email1", "pwd1");
-        Cuenta destino = new Cuenta("email2", "pwd2");
-        Cuenta destino2 = new Cuenta("email3", "pwd3");
+        System.out.println("sonAmigos");       
+        
+        String password = "abcd";
+        String email = "adddd@aaaaa.com";
+        String nombre = "cesar";
+        Date fecha = new Date();
+
+        Cuenta origen = new Cuenta(email, password, nombre, fecha);
+        
+         password = "aabcd";
+         email = "addddd@aaaaa.com";
+         nombre = "cesar";
+         fecha = new Date();
+
+        Cuenta destino = new Cuenta(email, password, nombre, fecha);
+        
+         password = "babcd";
+         email = "fadddd@aaaaa.com";
+         nombre = "cesar";
+         fecha = new Date();
+
+        Cuenta destino2 = new Cuenta(email, password, nombre, fecha);
 
         gc.AltaCuenta(origen);
         gc.AltaCuenta(destino);
@@ -151,9 +187,27 @@ public class GestionRelacionesImplTest {
     @Test
     public void testQuitarAmigos() {
         System.out.println("QuitarAmigos");
-        Cuenta origen = new Cuenta("email1", "pwd1");
-        Cuenta destino = new Cuenta("email2", "pwd2");
-        Cuenta destino2 = new Cuenta("email3", "pwd3");
+       
+        String password = "abcd";
+        String email = "adddd@aaaaa.com";
+        String nombre = "cesar";
+        Date fecha = new Date();
+
+        Cuenta origen = new Cuenta(email, password, nombre, fecha);
+        
+         password = "abcd";
+         email = "bdddd@aaaaa.com";
+         nombre = "cesar";
+         fecha = new Date();
+
+        Cuenta destino = new Cuenta(email, password, nombre, fecha);
+        
+         password = "abcd";
+         email = "cdddd@aaaaa.com";
+         nombre = "cesar";
+         fecha = new Date();
+
+        Cuenta destino2 = new Cuenta(email, password, nombre, fecha);
 
         gc.AltaCuenta(origen);
         gc.AltaCuenta(destino);
@@ -181,8 +235,20 @@ public class GestionRelacionesImplTest {
     @Test
     public void testMostrarAmigos() {
         System.out.println("Mostrar amigos");
-        Cuenta origen = new Cuenta("email1", "pwd1");
-        Cuenta destino = new Cuenta("email2", "pwd2");
+        
+        String password = "abcd";
+        String email = "bbbb@aaaaa.com";
+        String nombre = "cesar";
+        Date fecha = new Date();
+
+        Cuenta origen = new Cuenta(email, password, nombre, fecha);
+        
+         password = "abcd";
+         email = "aaaa@aaaaa.com";
+         nombre = "cesar";
+         fecha = new Date();
+
+        Cuenta destino = new Cuenta(email, password, nombre, fecha);
 
         gc.AltaCuenta(origen);
         gc.AltaCuenta(destino);
@@ -198,11 +264,35 @@ public class GestionRelacionesImplTest {
     @Test
     public void testAmigosPotenciales() {
         System.out.println("Mostrar amigos potenciales");
-        Cuenta u1 = new Cuenta("email1", "pwd1");
-        Cuenta u2 = new Cuenta("email2", "pwd2");
-        Cuenta u3 = new Cuenta("email3", "pwd3");
-        Cuenta u4 = new Cuenta("email4", "pwd4");
         
+        String password = "abcd";
+        String email = "adddd@aaaaa.com";
+        String nombre = "cesar";
+        Date fecha = new Date();
+
+        Cuenta u1 = new Cuenta(email, password, nombre, fecha);
+        
+         password = "abcd";
+         email = "bdddd@aaaaa.com";
+         nombre = "cesar";
+         fecha = new Date();
+
+        Cuenta u2 = new Cuenta(email, password, nombre, fecha);
+        
+         password = "abcd";
+         email = "cdddd@aaaaa.com";
+         nombre = "cesar";
+         fecha = new Date();
+
+        Cuenta u3 = new Cuenta(email, password, nombre, fecha);
+        
+         password = "abcd";
+         email = "ddddd@aaaaa.com";
+         nombre = "cesar";
+         fecha = new Date();
+
+        Cuenta u4 = new Cuenta(email, password, nombre, fecha);
+                
         gc.AltaCuenta(u1);
         gc.AltaCuenta(u2);
         gc.AltaCuenta(u3);

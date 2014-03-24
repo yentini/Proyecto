@@ -3,13 +3,17 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package com.plan.proyecto.servicios.login;
+
+import com.plan.proyecto.beans.Cuenta;
 
 /**
  *
  * @author Administrador
  */
 public interface GestionLogin {
-    Boolean autenticarse(String email, String pwd);
+
+    Cuenta autenticarse(String email, String pwd);
+    
+    Cuenta autenticarse(Cuenta cuenta);
 }

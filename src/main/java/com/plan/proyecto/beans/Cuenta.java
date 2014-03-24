@@ -20,6 +20,8 @@ import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 /**
  *
@@ -32,9 +34,7 @@ import javax.persistence.TemporalType;
     @NamedQuery(name = "Cuenta.findAll", query = "SELECT c FROM Cuenta c"),
     @NamedQuery(name = "Cuenta.findByEmail", query = "SELECT c FROM Cuenta c WHERE c.email = :valor"),
     @NamedQuery(name = "Cuenta.findAmigos", query = "SELECT c FROM Cuenta c WHERE c.id = :idorigen and :idamigo MEMBER OF c.amigos"),
-    @NamedQuery(name = "Cuenta.findAmigosByCuenta", query = "SELECT c.amigos FROM Cuenta c WHERE c.id = :idorigen"),
-    //@NamedQuery(name = "Cuenta.findAmigosPotencialesByCuenta", query = "SELECT c FROM Cuenta AS c WHERE c MEMBER OF (SELECT p.amigos FROM Cuenta AS p WHERE p.id = :idorigen)")
-    
+    @NamedQuery(name = "Cuenta.findAmigosByCuenta", query = "SELECT c.amigos FROM Cuenta c WHERE c.id = :idorigen"), //@NamedQuery(name = "Cuenta.findAmigosPotencialesByCuenta", query = "SELECT c FROM Cuenta AS c WHERE c MEMBER OF (SELECT p.amigos FROM Cuenta AS p WHERE p.id = :idorigen)")
 })
 public class Cuenta implements Serializable {
 
@@ -43,14 +43,21 @@ public class Cuenta implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
+    @NotNull
+    @Size(min = 6, max = 25)
     private String email;
 
+    @NotNull
+    @Size(min = 4, max = 25)
     private String password;
 
+    @NotNull
+    @Size(min = 2, max = 25)
     private String nombre;
 
     private String apellidos;
 
+    @NotNull
     @Temporal(TemporalType.DATE)
     private Date fechaNacimiento;
 
@@ -66,6 +73,21 @@ public class Cuenta implements Serializable {
     public Cuenta(String email, String password) {
         this.email = email;
         this.password = password;
+    }
+
+    public Cuenta(String email, String password, String nombre, Date fechaNacimiento) {
+        this.email = email;
+        this.password = password;
+        this.nombre = nombre;
+        this.fechaNacimiento = fechaNacimiento;
+    }
+    
+    public Cuenta(String email, String password, String nombre, String apellidos, Date fechaNacimiento) {
+        this.email = email;
+        this.password = password;
+        this.nombre = nombre;
+        this.apellidos = apellidos;
+        this.fechaNacimiento = fechaNacimiento;
     }
 
     public List<Contenido> getContenidos() {

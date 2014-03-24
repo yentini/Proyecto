@@ -7,20 +7,20 @@ package com.plan.proyecto.servicios.utilidades;
 
 import org.jasypt.encryption.pbe.StandardPBEStringEncryptor;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.stereotype.Component;
+import org.springframework.context.annotation.Configuration;
 
 
 /**
  *
  * @author Administrador
  */
-@Component
+@Configuration
 public abstract class Encriptar {
 
 //    @Value("${claveEncrypt}")
-    @Value("#{systemProperties['constantes.claveEncrypt']}")
+//    @Value("#{systemProperties['constantes.claveEncrypt']}")
 //    @Value("#{constantes['claveEncrypt']}")  
-//    @Value("#{constantes.claveEncrypt}")  
+    @Value("#{constantes.claveEncrypt}")  
     private static final String claveEncrypt = "cursoJava";
 
 //    private Logger log = Logger.getLogger(Encriptar.class.getName());

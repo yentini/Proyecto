@@ -6,10 +6,15 @@
 
 <html>
     <head>
+        <link rel="stylesheet" href="js/jquery-ui-1.10.4/css/ui-lightness/jquery-ui-1.10.4.custom.css">
+        <script src="js/jquery-1.11.0.js"></script>
+        <script src="js/utilidadesMuro.js"></script>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Bienvenido a tu muro</title>
     </head>
     <body>
-        <h2>Ya eres nuevo usuario de EWallBook</h2>        
+        <input id="id" type="hidden" value="${cuenta.id}">
+        <h2>Ya eres nuevo usuario de EWallBook</h2> 
+        <div id="hueco"></div>
     </body>
 </html>

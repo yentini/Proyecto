@@ -26,23 +26,28 @@ public class LoginImpl implements GestionLogin {
 
     @Autowired
     GestionRelaciones gestionRelaciones;
-    
+
     @Autowired
     GestionCuentas gestionCuentas;
 
     @Override
-    public Boolean autenticarse(String email, String pwd) {
+    public Cuenta autenticarse(String email, String pwd) {
 
         List<Cuenta> cuentasSistema = gestionCuentas.mostrarCuentasSistema();
 
         for (Cuenta cuenta : cuentasSistema) {
             if (cuenta.getEmail().equals(email)
                     && Encriptar.decrypt(cuenta.getPassword()).equals(pwd)) {
-                return true;
+                return cuenta;
             }
         }
-        return false;
+        return null;
 //        return dao.findByEmailAndPassword(email, encriptar.encrypt(pwd)) != null;
+    }
+
+    @Override
+    public Cuenta autenticarse(Cuenta cuenta) {
+        return autenticarse(cuenta.getEmail(), cuenta.getPassword());
     }
 
 }

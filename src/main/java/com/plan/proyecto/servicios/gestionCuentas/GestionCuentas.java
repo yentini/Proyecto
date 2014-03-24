@@ -22,4 +22,8 @@ public interface GestionCuentas {
 
     List<Cuenta> mostrarCuentasSistema();
 
+    Boolean existeCuenta(Cuenta cuenta);
+
+    Cuenta devolverCuenta(Long id);
+
 }
