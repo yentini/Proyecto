@@ -21,7 +21,7 @@ $(document).ready(function() {
 
     $(function() {
         $("#relaciones").tabs({
-            event: "mouseover"
+//            event: "mouseover"
         });
     });
 

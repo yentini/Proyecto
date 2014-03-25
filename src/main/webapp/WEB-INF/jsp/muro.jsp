@@ -55,12 +55,12 @@
                 </ul>
                 <div id="amigos">
                     <c:forEach items="${amigos}" var="amigo">
-                       <a href="quitarAmigo.html?idAmigo=${amigo.id}&ident=${cuenta.id}">${amigo.nombre}</a
+                        <a href="quitarAmigo.html?idAmigo=${amigo.id}&ident=${cuenta.id}">${amigo.nombre}</a><br>
                     </c:forEach>
                 </div>
                 <div id="posiblesAmigos">
                     <c:forEach items="${usuarios}" var="usuario">
-                         <a href="hacerAmigo.html?idAmigo=${usuario.id}&ident=${cuenta.id}">${usuario.nombre}</a>  
+                        <a href="hacerAmigo.html?idAmigo=${usuario.id}&ident=${cuenta.id}">${usuario.nombre}</a><br>
                     </c:forEach>
                 </div>
             </div>

@@ -74,13 +74,16 @@ public class AltaControlador {
 
             if (retornoCuenta != null) {
                 List<Mensaje> mensajes = gestionContenidos.mostrarMensajes(retornoCuenta);
+                List<Cuenta> amigos = gestionRelaciones.mostrarAmigos(retornoCuenta);
+                List<Cuenta> usuarios = gestionRelaciones.amigosPotenciales(retornoCuenta);
 
+                model.addAttribute("amigos", amigos);
+                model.addAttribute("usuarios", usuarios);
+                model.addAttribute("mensajes", mensajes);
+                model.addAttribute("cuenta", retornoCuenta);
                 if (mensajes != null) {
                     model.addAttribute("vacio", mensajes.isEmpty());
                 }
-
-                model.addAttribute("mensajes", mensajes);
-                model.addAttribute("cuenta", retornoCuenta);
                 return "muro";
             } else {
                 model.addAttribute("mensajeLogin", "El usuario no existe o la contraseña es incorrecta");
@@ -123,16 +126,18 @@ public class AltaControlador {
 
         if (retornoCuenta != null) {
             List<Mensaje> mensajes = gestionContenidos.mostrarMensajes(retornoCuenta);
+            List<Cuenta> amigos = gestionRelaciones.mostrarAmigos(retornoCuenta);
+            List<Cuenta> usuarios = gestionRelaciones.amigosPotenciales(retornoCuenta);
 
-            if (mensajes != null) {
-                model.addAttribute("vacio", mensajes.isEmpty());
-            }
-
+            model.addAttribute("amigos", amigos);
+            model.addAttribute("usuarios", usuarios);
             mensaje = new Mensaje("Escribe el mensaje...");
-
             model.addAttribute("mensaje", mensaje);
             model.addAttribute("mensajes", mensajes);
             model.addAttribute("cuenta", retornoCuenta);
+            if (mensajes != null) {
+                model.addAttribute("vacio", mensajes.isEmpty());
+            }
             return "muro";
         } else {
             model.addAttribute("mensajeLogin", "El usuario no existe o la contraseña es incorrecta");
@@ -151,13 +156,16 @@ public class AltaControlador {
 
         if (retornoCuenta != null) {
             List<Mensaje> mensajes = gestionContenidos.mostrarMensajes(retornoCuenta);
+            List<Cuenta> amigos = gestionRelaciones.mostrarAmigos(retornoCuenta);
+            List<Cuenta> usuarios = gestionRelaciones.amigosPotenciales(retornoCuenta);
 
+            model.addAttribute("amigos", amigos);
+            model.addAttribute("usuarios", usuarios);
+            model.addAttribute("mensajes", mensajes);
+            model.addAttribute("cuenta", retornoCuenta);
             if (mensajes != null) {
                 model.addAttribute("vacio", mensajes.isEmpty());
             }
-
-            model.addAttribute("mensajes", mensajes);
-            model.addAttribute("cuenta", retornoCuenta);
             return "muro";
         } else {
             model.addAttribute("mensajeLogin", "El usuario no existe o la contraseña es incorrecta");
@@ -179,10 +187,38 @@ public class AltaControlador {
             List<Cuenta> usuarios = gestionRelaciones.amigosPotenciales(retornoCuenta);
 
             model.addAttribute("amigos", amigos);
-            model.addAttribute("usuarios", usuarios);            
+            model.addAttribute("usuarios", usuarios);
             model.addAttribute("mensajes", mensajes);
             model.addAttribute("cuenta", retornoCuenta);
-            
+
+            if (mensajes != null) {
+                model.addAttribute("vacio", mensajes.isEmpty());
+            }
+            return "muro";
+        } else {
+            model.addAttribute("mensajeLogin", "El usuario no existe o la contraseña es incorrecta");
+            return "alta";
+        }
+    }
+
+    @RequestMapping(value = "/quitarAmigo.html", method = RequestMethod.GET)
+    public String quitarAmigo(@RequestParam("idAmigo") Long idAmigo, @RequestParam("ident") Long id, Model model) {
+
+        Cuenta retornoCuenta = gc.devolverCuenta(id);
+        Cuenta amigo = gc.devolverCuenta(idAmigo);
+
+        gestionRelaciones.quitarAmigos(retornoCuenta, amigo);
+
+        if (retornoCuenta != null) {
+            List<Mensaje> mensajes = gestionContenidos.mostrarMensajes(retornoCuenta);
+            List<Cuenta> amigos = gestionRelaciones.mostrarAmigos(retornoCuenta);
+            List<Cuenta> usuarios = gestionRelaciones.amigosPotenciales(retornoCuenta);
+
+            model.addAttribute("amigos", amigos);
+            model.addAttribute("usuarios", usuarios);
+            model.addAttribute("mensajes", mensajes);
+            model.addAttribute("cuenta", retornoCuenta);
+
             if (mensajes != null) {
                 model.addAttribute("vacio", mensajes.isEmpty());
             }
