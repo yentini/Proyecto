@@ -6,15 +6,20 @@
 
 <html>
     <head>
-        <link rel="stylesheet" href="js/jquery-ui-1.10.4/css/ui-lightness/jquery-ui-1.10.4.custom.css">
         <script src="js/jquery-1.11.0.js"></script>
         <script src="js/utilidadesMuro.js"></script>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Bienvenido a tu muro</title>
     </head>
     <body>
-        <input id="id" type="hidden" value="${cuenta.id}">
-        <h2>Ya eres nuevo usuario de EWallBook</h2> 
-        <div id="hueco"></div>
+        <input id="id" type="hidden" value="${cuenta.id}">         
+        <div><h2>${cuenta.nombre} estás en tu EWALL</h2></div>
+        <div>
+            <form:form id="login" action="formularioPublicarContenido.html" modelAttribute="mensaje">
+                <form:textarea id="mensajeTexto" rows="8" cols="50" path="texto"></form:textarea>
+                    <br>
+                <input type="submit" id="botonPublicar" value="Publicar mensaje"></input>
+            </form:form>
+        </div>
     </body>
 </html>

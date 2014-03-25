@@ -6,6 +6,7 @@
 package com.plan.proyecto.controladores;
 
 import com.plan.proyecto.beans.Cuenta;
+import com.plan.proyecto.beans.Mensaje;
 import com.plan.proyecto.servicios.gestionCuentas.GestionCuentas;
 import com.plan.proyecto.servicios.login.GestionLogin;
 import javax.validation.Valid;
@@ -22,7 +23,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
  */
 @Controller
 //@RequestMapping(value = {"alta.html","formularioLogin.html"})
-////@RequestMapping(value = {"alta.html","formularioLogin.html","formularioAlta.html"})
+//@RequestMapping(value = {"alta.html","formularioLogin.html","formularioAlta.html"})
 public class AltaControlador {
 
     @Autowired
@@ -42,7 +43,7 @@ public class AltaControlador {
         return new Cuenta();
     }
 
-    @RequestMapping(value="/alta.html",method = RequestMethod.GET)
+    @RequestMapping(value = "/alta.html", method = RequestMethod.GET)
     public void tratarGet() {
     }
 
@@ -71,5 +72,20 @@ public class AltaControlador {
             return "alta";
         }
 
+    }
+    
+    @ModelAttribute("mensaje")
+    public Mensaje getMensaje() {
+        return new Mensaje("dddddddddddddd");
+    }
+
+//    @RequestMapping(value = "/muro.html", method = RequestMethod.GET)
+//    public void tratarGet(@RequestParam("id") Long id, Model model) {
+//        
+//        Cuenta cuentaRecuperada = gc.devolverCuenta(id);
+//        model.addAttribute("cuenta", cuentaRecuperada);
+//    }
+    @RequestMapping(value = "/muro.html", method = RequestMethod.GET)
+    public void tratarGete() {
     }
 }
