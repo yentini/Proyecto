@@ -148,4 +148,9 @@ public class gestionContenidosImpls implements GestionContenidos {
         return comentarios;
     }
 
+    @Override
+    public Contenido devolverContenido(Long id) {
+        return daoContenido.findById(id);
+    }
+
 }

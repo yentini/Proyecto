@@ -31,7 +31,7 @@ public class GestionRelacionesImpl implements GestionRelaciones {
         for (Cuenta cuenta : amigos) {
             listaDevolver.add(hacerAmigo(origen, cuenta));
         }
-        dao.modificar(origen);
+//        dao.modificar(origen);
         return listaDevolver;
     }
 
@@ -39,6 +39,9 @@ public class GestionRelacionesImpl implements GestionRelaciones {
 
         Cuenta retorno = null;
 
+        origen = dao.findById(origen.getId());
+        amigo = dao.findById(amigo.getId());
+        
         if (!sonAmigos(origen, amigo)) {
             origen.getAmigos().add(amigo);
             retorno = amigo;

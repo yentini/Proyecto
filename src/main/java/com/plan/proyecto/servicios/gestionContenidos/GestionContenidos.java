@@ -27,4 +27,6 @@ public interface GestionContenidos {
     
     List<Contenido> mostrarComentarios(Contenido mensaje);
     
+    Contenido devolverContenido(Long id);
+    
 }

@@ -44,11 +44,21 @@ public abstract class Contenido implements Serializable {
 
     private String texto;
 
+    private String resumen;
+
     @ManyToOne
     private Cuenta cuenta;
 
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Contenido> comentarios = new ArrayList<>();
+
+    public String getResumen() {
+        return resumen;
+    }
+
+    public void setResumen(String resumen) {
+        this.resumen = resumen;
+    }
 
     public String getTexto() {
 
@@ -57,7 +67,16 @@ public abstract class Contenido implements Serializable {
 
     public void setTexto(String texto) {
 
+        int longitudResumen = 20;
+        String puntosSuspensivos = "...";
+
         this.texto = texto;
+        int longitud = texto.length();
+
+        if (longitud < longitudResumen) {
+            longitudResumen = longitud;
+        }
+        this.resumen = texto.substring(0, longitudResumen) + puntosSuspensivos;
     }
 
     public Long getId() {

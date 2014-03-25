@@ -10,6 +10,7 @@ import com.plan.proyecto.beans.Cuenta;
 import com.plan.proyecto.beans.Mensaje;
 import com.plan.proyecto.servicios.gestionContenidos.GestionContenidos;
 import com.plan.proyecto.servicios.gestionCuentas.GestionCuentas;
+import com.plan.proyecto.servicios.gestionRelaciones.GestionRelaciones;
 import com.plan.proyecto.servicios.login.GestionLogin;
 import java.util.List;
 import javax.validation.Valid;
@@ -39,6 +40,9 @@ public class AltaControlador {
     @Autowired
     GestionContenidos gestionContenidos;
 
+    @Autowired
+    GestionRelaciones gestionRelaciones;
+
     @ModelAttribute("cuentaAlta")
     public Cuenta getCuentaAlta() {
         return new Cuenta();
@@ -67,8 +71,21 @@ public class AltaControlador {
             return "alta";
         } else {
             Cuenta retornoCuenta = gc.AltaCuenta(cuenta);
-            model.addAttribute("cuenta", retornoCuenta);
-            return "muro";
+
+            if (retornoCuenta != null) {
+                List<Mensaje> mensajes = gestionContenidos.mostrarMensajes(retornoCuenta);
+
+                if (mensajes != null) {
+                    model.addAttribute("vacio", mensajes.isEmpty());
+                }
+
+                model.addAttribute("mensajes", mensajes);
+                model.addAttribute("cuenta", retornoCuenta);
+                return "muro";
+            } else {
+                model.addAttribute("mensajeLogin", "El usuario no existe o la contraseña es incorrecta");
+                return "alta";
+            }
         }
     }
 
@@ -76,6 +93,61 @@ public class AltaControlador {
     public String tratarLogin(@ModelAttribute("cuentaLogin") Cuenta cuenta, Model model) {
 
         Cuenta retornoCuenta = gl.autenticarse(cuenta);
+
+        if (retornoCuenta != null) {
+            List<Mensaje> mensajes = gestionContenidos.mostrarMensajes(retornoCuenta);
+            List<Cuenta> amigos = gestionRelaciones.mostrarAmigos(retornoCuenta);
+            List<Cuenta> usuarios = gestionRelaciones.amigosPotenciales(retornoCuenta);
+
+            model.addAttribute("amigos", amigos);
+            model.addAttribute("usuarios", usuarios);
+            model.addAttribute("mensajes", mensajes);
+            model.addAttribute("cuenta", retornoCuenta);
+
+            if (mensajes != null) {
+                model.addAttribute("vacio", mensajes.isEmpty());
+            }
+            return "muro";
+        } else {
+            model.addAttribute("mensajeLogin", "El usuario no existe o la contraseña es incorrecta");
+            return "alta";
+        }
+    }
+
+    @RequestMapping(value = "/formularioPublicarContenido.html", method = RequestMethod.POST)
+    public String tratarMensaje(@RequestParam("ident") Long id, @ModelAttribute("mensaje") Contenido mensaje, Model model) {
+
+        Cuenta retornoCuenta = gc.devolverCuenta(id);
+
+        gestionContenidos.publicarContenido(retornoCuenta, mensaje, null);
+
+        if (retornoCuenta != null) {
+            List<Mensaje> mensajes = gestionContenidos.mostrarMensajes(retornoCuenta);
+
+            if (mensajes != null) {
+                model.addAttribute("vacio", mensajes.isEmpty());
+            }
+
+            mensaje = new Mensaje("Escribe el mensaje...");
+
+            model.addAttribute("mensaje", mensaje);
+            model.addAttribute("mensajes", mensajes);
+            model.addAttribute("cuenta", retornoCuenta);
+            return "muro";
+        } else {
+            model.addAttribute("mensajeLogin", "El usuario no existe o la contraseña es incorrecta");
+            return "alta";
+        }
+    }
+
+    @RequestMapping(value = "/eliminarMensaje.html", method = RequestMethod.POST)
+    public String eliminarMensaje(@RequestParam("identMensaje") Long idMensaje, @RequestParam("ident") Long id, Model model) {
+
+        Cuenta retornoCuenta = gc.devolverCuenta(id);
+
+        Contenido mensaje = gestionContenidos.devolverContenido(idMensaje);
+
+        gestionContenidos.eliminarContenido(mensaje);
 
         if (retornoCuenta != null) {
             List<Mensaje> mensajes = gestionContenidos.mostrarMensajes(retornoCuenta);
@@ -93,24 +165,31 @@ public class AltaControlador {
         }
     }
 
-    @RequestMapping(value = "/muro.html", method = RequestMethod.GET)
-    public void tratarGetMuro(@RequestParam("cuenta") Cuenta cuenta, Model model) {
-
-        System.out.println("");
-//        Cuenta cuentaRecuperada = gc.devolverCuenta(id);
-//        model.addAttribute("cuenta", cuentaRecuperada);
-    }
-
-    @RequestMapping(value = "/formularioPublicarContenido.html", method = RequestMethod.POST)
-    public String tratarMensaje(@RequestParam("ident") Long id, @ModelAttribute("mensaje") Contenido mensaje, Model model) {
+    @RequestMapping(value = "/hacerAmigo.html", method = RequestMethod.GET)
+    public String hacerAmigo(@RequestParam("idAmigo") Long idAmigo, @RequestParam("ident") Long id, Model model) {
 
         Cuenta retornoCuenta = gc.devolverCuenta(id);
+        Cuenta amigo = gc.devolverCuenta(idAmigo);
 
-        gestionContenidos.publicarContenido(retornoCuenta, mensaje, null);
+        gestionRelaciones.hacerAmigos(retornoCuenta, amigo);
 
-        model.addAttribute("cuenta", retornoCuenta);
+        if (retornoCuenta != null) {
+            List<Mensaje> mensajes = gestionContenidos.mostrarMensajes(retornoCuenta);
+            List<Cuenta> amigos = gestionRelaciones.mostrarAmigos(retornoCuenta);
+            List<Cuenta> usuarios = gestionRelaciones.amigosPotenciales(retornoCuenta);
 
-        return "muro";
-
+            model.addAttribute("amigos", amigos);
+            model.addAttribute("usuarios", usuarios);            
+            model.addAttribute("mensajes", mensajes);
+            model.addAttribute("cuenta", retornoCuenta);
+            
+            if (mensajes != null) {
+                model.addAttribute("vacio", mensajes.isEmpty());
+            }
+            return "muro";
+        } else {
+            model.addAttribute("mensajeLogin", "El usuario no existe o la contraseña es incorrecta");
+            return "alta";
+        }
     }
 }

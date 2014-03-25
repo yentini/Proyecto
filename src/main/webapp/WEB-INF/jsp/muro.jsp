@@ -14,7 +14,7 @@
         <title>Bienvenido a tu muro</title>
     </head>
     <body>       
-        <div><h2>${cuenta.nombre} estás en tu EWALL</h2></div>
+        <div><h1>${cuenta.nombre} estás en tu EWALL</h1></div>
         <div>
             <div>
                 <div id="dialog-mensaje" title="Crear nuevo mensaje">
@@ -34,14 +34,35 @@
                 <c:if test="${vacio == false}">
                     <c:forEach items="${mensajes}" var="mensaje">
                         <h3>
-                            Prueba
+                            ${mensaje.resumen}
                         </h3>
                         <div>
-                            <p>${mensaje.texto}</p>
-                            <input type="button" value="prueba">
+                            <form:form action="eliminarMensaje.html?identMensaje=${mensaje.id}&ident=${cuenta.id}">
+                                <p>${mensaje.texto}</p>
+                                <input type="submit" value="Eliminar">
+                            </form:form>
                         </div>
                     </c:forEach>
                 </c:if>
+            </div>
+        </div>
+        <div>
+            <h2>Gestión de amigos</h2>
+            <div id="relaciones">
+                <ul>
+                    <li><a href="#amigos">Amigos</a></li>
+                    <li><a href="#posiblesAmigos">Nuevos Amigos</a></li>
+                </ul>
+                <div id="amigos">
+                    <c:forEach items="${amigos}" var="amigo">
+                       <a href="quitarAmigo.html?idAmigo=${amigo.id}&ident=${cuenta.id}">${amigo.nombre}</a
+                    </c:forEach>
+                </div>
+                <div id="posiblesAmigos">
+                    <c:forEach items="${usuarios}" var="usuario">
+                         <a href="hacerAmigo.html?idAmigo=${usuario.id}&ident=${cuenta.id}">${usuario.nombre}</a>  
+                    </c:forEach>
+                </div>
             </div>
         </div>
     </body>

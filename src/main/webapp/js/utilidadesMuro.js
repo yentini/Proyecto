@@ -16,9 +16,21 @@ $(document).ready(function() {
     });
 
     $("#mensajeAcordeon").accordion({
-        collapsible: true
+        collapsible: true   
     });
+
+    $(function() {
+        $("#relaciones").tabs({
+            event: "mouseover"
+        });
+    });
+
 });
+function eliminarMensaje(id) {
+    var mensaje = "#mensaje" + id;
+
+    $(mensaje).submit();
+}
 //    function llamadaAjax() {
 //        $.ajax({
 //            url: "muro.html",
