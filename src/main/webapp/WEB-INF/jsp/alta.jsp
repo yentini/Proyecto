@@ -6,12 +6,12 @@
 
 <html>
     <head>
-        <!--<link rel="stylesheet" href="js/jquery-ui-1.10.4/css/ui-lightness/jquery-ui-1.10.4.custom.css">
+        <link rel="stylesheet" href="js/jquery-ui-1.10.4/css/ui-lightness/jquery-ui-1.10.4.custom.css">
         <script src="js/jquery-1.11.0.js"></script>
         <script src="js/jquery-ui-1.10.4/js/jquery-ui-1.10.4.custom.js"></script>  
         <script src="js/jquery-validation-1.11.1/jquery.validate.js"></script> 
         <script src="js/jquery-validation-1.11.1/additional-methods.js"></script> 
-        <script src="js/utilidades.js"></script>-->
+        <script src="js/utilidades.js"></script>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Alta de nuevas cuentas</title>
     </head>

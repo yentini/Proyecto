@@ -11,7 +11,6 @@ import com.plan.proyecto.beans.Cuenta;
 import com.plan.proyecto.beans.Mensaje;
 import com.plan.proyecto.repositorios.DaoContenido;
 import com.plan.proyecto.repositorios.DaoCuenta;
-import com.plan.proyecto.servicios.utilidades.UrlParser;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

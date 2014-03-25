@@ -1,5 +1,24 @@
 $(document).ready(function() {
-    
+    $("#dialog-mensaje").dialog({
+        autoOpen: false,
+        height: 300,
+        width: 350,
+        modal: true,
+        buttons: {
+            "Publicar": function() {
+                $(this).dialog('close');
+                $("#login").submit();
+            }}
+    });
+
+    $("#crearMensaje").button().click(function() {
+        $("#dialog-mensaje").dialog("open");
+    });
+
+    $("#mensajeAcordeon").accordion({
+        collapsible: true
+    });
+});
 //    function llamadaAjax() {
 //        $.ajax({
 //            url: "muro.html",
@@ -19,4 +38,4 @@ $(document).ready(function() {
 //    }
 //    ;
 //    llamadaAjax();
-});
+        

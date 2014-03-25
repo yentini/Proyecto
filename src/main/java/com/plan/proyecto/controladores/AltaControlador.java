@@ -5,10 +5,13 @@
  */
 package com.plan.proyecto.controladores;
 
+import com.plan.proyecto.beans.Contenido;
 import com.plan.proyecto.beans.Cuenta;
 import com.plan.proyecto.beans.Mensaje;
+import com.plan.proyecto.servicios.gestionContenidos.GestionContenidos;
 import com.plan.proyecto.servicios.gestionCuentas.GestionCuentas;
 import com.plan.proyecto.servicios.login.GestionLogin;
+import java.util.List;
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -16,14 +19,15 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 /**
  *
  * @author Administrador
  */
-@Controller
 //@RequestMapping(value = {"alta.html","formularioLogin.html"})
 //@RequestMapping(value = {"alta.html","formularioLogin.html","formularioAlta.html"})
+@Controller
 public class AltaControlador {
 
     @Autowired
@@ -31,6 +35,9 @@ public class AltaControlador {
 
     @Autowired
     GestionLogin gl;
+
+    @Autowired
+    GestionContenidos gestionContenidos;
 
     @ModelAttribute("cuentaAlta")
     public Cuenta getCuentaAlta() {
@@ -41,6 +48,11 @@ public class AltaControlador {
     public Cuenta getCuentaLogin() {
 
         return new Cuenta();
+    }
+
+    @ModelAttribute("mensaje")
+    public Contenido getMensaje() {
+        return new Mensaje("Escribe el mensaje...");
     }
 
     @RequestMapping(value = "/alta.html", method = RequestMethod.GET)
@@ -54,7 +66,8 @@ public class AltaControlador {
             model.addAttribute("mensajeAlta", "El usuario ya existe");
             return "alta";
         } else {
-            gc.AltaCuenta(cuenta);
+            Cuenta retornoCuenta = gc.AltaCuenta(cuenta);
+            model.addAttribute("cuenta", retornoCuenta);
             return "muro";
         }
     }
@@ -65,27 +78,39 @@ public class AltaControlador {
         Cuenta retornoCuenta = gl.autenticarse(cuenta);
 
         if (retornoCuenta != null) {
+            List<Mensaje> mensajes = gestionContenidos.mostrarMensajes(retornoCuenta);
+
+            if (mensajes != null) {
+                model.addAttribute("vacio", mensajes.isEmpty());
+            }
+
+            model.addAttribute("mensajes", mensajes);
             model.addAttribute("cuenta", retornoCuenta);
             return "muro";
         } else {
             model.addAttribute("mensajeLogin", "El usuario no existe o la contraseña es incorrecta");
             return "alta";
         }
-
-    }
-    
-    @ModelAttribute("mensaje")
-    public Mensaje getMensaje() {
-        return new Mensaje("dddddddddddddd");
     }
 
-//    @RequestMapping(value = "/muro.html", method = RequestMethod.GET)
-//    public void tratarGet(@RequestParam("id") Long id, Model model) {
-//        
+    @RequestMapping(value = "/muro.html", method = RequestMethod.GET)
+    public void tratarGetMuro(@RequestParam("cuenta") Cuenta cuenta, Model model) {
+
+        System.out.println("");
 //        Cuenta cuentaRecuperada = gc.devolverCuenta(id);
 //        model.addAttribute("cuenta", cuentaRecuperada);
-//    }
-    @RequestMapping(value = "/muro.html", method = RequestMethod.GET)
-    public void tratarGete() {
+    }
+
+    @RequestMapping(value = "/formularioPublicarContenido.html", method = RequestMethod.POST)
+    public String tratarMensaje(@RequestParam("ident") Long id, @ModelAttribute("mensaje") Contenido mensaje, Model model) {
+
+        Cuenta retornoCuenta = gc.devolverCuenta(id);
+
+        gestionContenidos.publicarContenido(retornoCuenta, mensaje, null);
+
+        model.addAttribute("cuenta", retornoCuenta);
+
+        return "muro";
+
     }
 }

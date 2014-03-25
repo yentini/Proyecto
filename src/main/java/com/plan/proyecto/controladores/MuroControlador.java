@@ -20,11 +20,11 @@ import org.springframework.web.bind.annotation.RequestParam;
  *
  * @author Administrador
  */
-@Controller
+//@Controller
 public class MuroControlador {
 
-    @Autowired
-    GestionCuentas gc;
+//    @Autowired
+//    GestionCuentas gc;
 
 //    @ModelAttribute("mensaje")
 //    public Mensaje getMensaje() {
