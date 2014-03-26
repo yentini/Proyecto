@@ -94,4 +94,13 @@ public class GestionRelacionesImpl implements GestionRelaciones {
         return dao.findAmigosPotencialesByCuenta(origen);
     }
 
+    @Override
+    public List<Cuenta> deQuienSoyAmigo(Cuenta cuenta) {
+        
+         if (cuenta == null) {
+            return null;
+        }
+        return dao.findDeQuienSoyAmigoByCuenta(cuenta);
+    }
+
 }

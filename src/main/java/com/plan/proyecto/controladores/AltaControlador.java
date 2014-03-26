@@ -76,7 +76,10 @@ public class AltaControlador {
                 List<Mensaje> mensajes = gestionContenidos.mostrarMensajes(retornoCuenta);
                 List<Cuenta> amigos = gestionRelaciones.mostrarAmigos(retornoCuenta);
                 List<Cuenta> usuarios = gestionRelaciones.amigosPotenciales(retornoCuenta);
+                List<Cuenta> muros = gestionRelaciones.deQuienSoyAmigo(retornoCuenta);
 
+                model.addAttribute("muroId",retornoCuenta);
+                model.addAttribute("muros", muros);
                 model.addAttribute("amigos", amigos);
                 model.addAttribute("usuarios", usuarios);
                 model.addAttribute("mensajes", mensajes);
@@ -101,7 +104,10 @@ public class AltaControlador {
             List<Mensaje> mensajes = gestionContenidos.mostrarMensajes(retornoCuenta);
             List<Cuenta> amigos = gestionRelaciones.mostrarAmigos(retornoCuenta);
             List<Cuenta> usuarios = gestionRelaciones.amigosPotenciales(retornoCuenta);
+            List<Cuenta> muros = gestionRelaciones.deQuienSoyAmigo(retornoCuenta);
 
+            model.addAttribute("muroId",retornoCuenta);
+            model.addAttribute("muros", muros);
             model.addAttribute("amigos", amigos);
             model.addAttribute("usuarios", usuarios);
             model.addAttribute("mensajes", mensajes);
@@ -128,7 +134,10 @@ public class AltaControlador {
             List<Mensaje> mensajes = gestionContenidos.mostrarMensajes(retornoCuenta);
             List<Cuenta> amigos = gestionRelaciones.mostrarAmigos(retornoCuenta);
             List<Cuenta> usuarios = gestionRelaciones.amigosPotenciales(retornoCuenta);
+            List<Cuenta> muros = gestionRelaciones.deQuienSoyAmigo(retornoCuenta);
 
+            model.addAttribute("muroId",retornoCuenta);
+            model.addAttribute("muros", muros);
             model.addAttribute("amigos", amigos);
             model.addAttribute("usuarios", usuarios);
             mensaje = new Mensaje("Escribe el mensaje...");
@@ -158,7 +167,10 @@ public class AltaControlador {
             List<Mensaje> mensajes = gestionContenidos.mostrarMensajes(retornoCuenta);
             List<Cuenta> amigos = gestionRelaciones.mostrarAmigos(retornoCuenta);
             List<Cuenta> usuarios = gestionRelaciones.amigosPotenciales(retornoCuenta);
+            List<Cuenta> muros = gestionRelaciones.deQuienSoyAmigo(retornoCuenta);
 
+            model.addAttribute("muroId",retornoCuenta);
+            model.addAttribute("muros", muros);
             model.addAttribute("amigos", amigos);
             model.addAttribute("usuarios", usuarios);
             model.addAttribute("mensajes", mensajes);
@@ -185,7 +197,10 @@ public class AltaControlador {
             List<Mensaje> mensajes = gestionContenidos.mostrarMensajes(retornoCuenta);
             List<Cuenta> amigos = gestionRelaciones.mostrarAmigos(retornoCuenta);
             List<Cuenta> usuarios = gestionRelaciones.amigosPotenciales(retornoCuenta);
+            List<Cuenta> muros = gestionRelaciones.deQuienSoyAmigo(retornoCuenta);
 
+            model.addAttribute("muroId",retornoCuenta);
+            model.addAttribute("muros", muros);
             model.addAttribute("amigos", amigos);
             model.addAttribute("usuarios", usuarios);
             model.addAttribute("mensajes", mensajes);
@@ -213,7 +228,41 @@ public class AltaControlador {
             List<Mensaje> mensajes = gestionContenidos.mostrarMensajes(retornoCuenta);
             List<Cuenta> amigos = gestionRelaciones.mostrarAmigos(retornoCuenta);
             List<Cuenta> usuarios = gestionRelaciones.amigosPotenciales(retornoCuenta);
+            List<Cuenta> muros = gestionRelaciones.deQuienSoyAmigo(retornoCuenta);
 
+            model.addAttribute("muroId",retornoCuenta);
+            model.addAttribute("muros", muros);
+            model.addAttribute("amigos", amigos);
+            model.addAttribute("usuarios", usuarios);
+            model.addAttribute("mensajes", mensajes);
+            model.addAttribute("cuenta", retornoCuenta);
+
+            if (mensajes != null) {
+                model.addAttribute("vacio", mensajes.isEmpty());
+            }
+            return "muro";
+        } else {
+            model.addAttribute("mensajeLogin", "El usuario no existe o la contraseña es incorrecta");
+            return "alta";
+        }
+    }
+    
+    @RequestMapping(value = "/cambiarMuro.html", method = RequestMethod.GET)
+    public String cambiarMuro(@RequestParam("idAmigo") Long idAmigo, @RequestParam("ident") Long id, Model model) {
+
+        Cuenta retornoCuenta = gc.devolverCuenta(id);
+        Cuenta amigo = gc.devolverCuenta(idAmigo);
+
+        gestionRelaciones.quitarAmigos(retornoCuenta, amigo);
+
+        if (retornoCuenta != null) {
+            List<Mensaje> mensajes = gestionContenidos.mostrarMensajes(amigo);
+            List<Cuenta> amigos = gestionRelaciones.mostrarAmigos(amigo);
+            List<Cuenta> usuarios = gestionRelaciones.amigosPotenciales(amigo);
+            List<Cuenta> muros = gestionRelaciones.deQuienSoyAmigo(amigo);
+
+            model.addAttribute("muroId",amigo);
+            model.addAttribute("muros", muros);
             model.addAttribute("amigos", amigos);
             model.addAttribute("usuarios", usuarios);
             model.addAttribute("mensajes", mensajes);

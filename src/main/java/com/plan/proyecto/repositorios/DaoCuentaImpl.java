@@ -105,4 +105,11 @@ public class DaoCuentaImpl extends DaoGenericoImpl<Cuenta, Long> implements DaoC
                 
         return usuarios;
     }
+
+    @Override
+    public List<Cuenta> findDeQuienSoyAmigoByCuenta(Cuenta cuenta) {
+        Query query = em.createNamedQuery("Cuenta.findDeQuienSoyAmigoByCuenta");
+        query.setParameter("idorigen", cuenta.getId());
+        return query.getResultList();
+    }
 }

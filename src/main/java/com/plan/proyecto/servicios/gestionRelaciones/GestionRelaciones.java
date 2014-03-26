@@ -21,6 +21,8 @@ public interface GestionRelaciones {
     List<Cuenta> quitarAmigos(Cuenta origen, Cuenta... amigos);
 
     List<Cuenta> mostrarAmigos(Cuenta cuenta);
+    
+    List<Cuenta> deQuienSoyAmigo(Cuenta cuenta);
 
     Boolean sonAmigos(Cuenta origen, Cuenta destino);
 }

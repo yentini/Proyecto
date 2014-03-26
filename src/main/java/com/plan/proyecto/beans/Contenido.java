@@ -65,17 +65,26 @@ public abstract class Contenido implements Serializable {
         return texto;
     }
 
-    public void setTexto(String texto) {
+    public void setTexto(String text) {
 
         int longitudResumen = 20;
         String puntosSuspensivos = "...";
 
-        this.texto = texto;
+        texto = actualizarEnlaces(text);
+
+        int longitudEnlace = texto.indexOf("<A");
+
+        longitudEnlace = longitudEnlace == -1 ? longitudResumen : longitudEnlace;
+
         int longitud = texto.length();
 
         if (longitud < longitudResumen) {
             longitudResumen = longitud;
         }
+        if (longitudEnlace < longitudResumen) {
+            longitudResumen = longitudEnlace;
+        }
+
         this.resumen = texto.substring(0, longitudResumen) + puntosSuspensivos;
     }
 
@@ -140,17 +149,11 @@ public abstract class Contenido implements Serializable {
         return true;
     }
 
-    public void actualizarTextoEnlaces() {
-
-        setTexto(actualizarEnlaces(getTexto()));
-    }
-
     private String actualizarEnlaces(String texto) {
-
         List<String> result = UrlParser.pullLinks(texto);
-
         for (String enlace : result) {
-            texto = texto.replace(enlace, "<A href='" + enlace + "'/>");
+//            texto = texto.replace(enlace, "<A href='" + enlace + "'/>");
+            texto = texto.replace(enlace, "<A href='http://" + enlace + "'/>" + enlace + "</A>");
         }
 
         return texto;

@@ -11,20 +11,50 @@ $(document).ready(function() {
             }}
     });
 
+    $("#dialog-comentario").dialog({
+        autoOpen: false,
+        height: 300,
+        width: 350,
+        modal: true,
+        buttons: {
+            "Comentar": function() {
+                $(this).dialog('close');
+                $("#comentarioForm").submit();
+            }}
+    });
+
+    $("#eliminarBoton").button().click(function() {
+        $("#eliminarForm").submit();
+    });
+
     $("#crearMensaje").button().click(function() {
         $("#dialog-mensaje").dialog("open");
     });
 
+    $("#crearComentario").button().click(function() {
+        $("#dialog-comentario").dialog("open");
+    });
+
     $("#mensajeAcordeon").accordion({
-        collapsible: true   
+        collapsible: true
     });
 
-    $(function() {
-        $("#relaciones").tabs({
+    $("#relaciones").tabs({
 //            event: "mouseover"
-        });
     });
 
+    if ($("#idCuenta").val() != $("#idMuro").val()) {
+        $("#murosAmigosPrincipal").hide();
+        $("#relacionesPrincipal").hide();
+        $("#dialog-mensajePrincipal").hide();
+        $(":input[value='Eliminar']").hide();
+        $("#retorno").show();
+        $("#huecoCabecera").text("el EWALL de " + $("#nombreMuro").val());
+    } else {
+        $("#huecoCabecera").text("en tu EWALL");
+        $("#retorno").hide();
+    }
+    ;
 });
 function eliminarMensaje(id) {
     var mensaje = "#mensaje" + id;

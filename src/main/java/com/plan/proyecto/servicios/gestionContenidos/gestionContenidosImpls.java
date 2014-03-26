@@ -92,7 +92,7 @@ public class gestionContenidosImpls implements GestionContenidos {
             return null;
         }
 
-        return actualizarEnlacesMensajes(daoContenido.findMensajeByCuenta(cuenta));
+        return daoContenido.findMensajeByCuenta(cuenta);
     }
 
     @Override
@@ -106,7 +106,7 @@ public class gestionContenidosImpls implements GestionContenidos {
             return null;
         }
 
-        return actualizarEnlacesComentarios(daoContenido.findComentarioByCuenta(cuenta));
+        return daoContenido.findComentarioByCuenta(cuenta);
 
     }
 
@@ -121,34 +121,7 @@ public class gestionContenidosImpls implements GestionContenidos {
             return null;
         }
 
-        return actualizarEnlacesContenidos(daoContenido.findComentariosoByMensaje(mensaje));
-    }
-
-    private List<Mensaje> actualizarEnlacesMensajes(List<Mensaje> mensajes) {
-
-        for (Mensaje mensaje : mensajes) {
-            mensaje.actualizarTextoEnlaces();;
-        }
-
-        return mensajes;
-    }
-
-    private List<Comentario> actualizarEnlacesComentarios(List<Comentario> comentarios) {
-
-        for (Comentario comentario : comentarios) {
-            comentario.actualizarTextoEnlaces();
-        }
-
-        return comentarios;
-    }
-
-    private List<Contenido> actualizarEnlacesContenidos(List<Contenido> comentarios) {
-
-        for (Contenido comentario : comentarios) {
-            comentario.actualizarTextoEnlaces();
-        }
-
-        return comentarios;
+        return daoContenido.findComentariosoByMensaje(mensaje);
     }
 
     @Override
