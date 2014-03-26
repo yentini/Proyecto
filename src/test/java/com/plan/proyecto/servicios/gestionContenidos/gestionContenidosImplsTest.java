@@ -145,8 +145,8 @@ public class gestionContenidosImplsTest {
         assertNull(daoContenido.findById(comentario.getId()));
 
         log.log(Level.INFO, "Prueba de eliminación de un comentario, terminada");
-
-        gestionContenidos.eliminarContenido(mensaje);
+        
+        mensaje = gestionContenidos.eliminarContenido(mensaje);
 
         assertNull(daoContenido.findById(mensaje.getId()));
 

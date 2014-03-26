@@ -62,7 +62,8 @@ public class GestionCuentasImpl implements GestionCuentas {
         }
 
         if (existeCuenta(cuenta)) {
-            dao.eliminar(cuenta);
+            Cuenta cuentaOriginal = dao.findById(cuenta.getId());
+            dao.eliminar(cuentaOriginal);
             return true;
         }
         return false;

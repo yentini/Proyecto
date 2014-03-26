@@ -49,7 +49,7 @@ public class DaoGenericoImpl<T, Long> implements DaoGenerico<T, Long> {
     @Override
     public T eliminar(T t) {
         T uno = em.merge(t);
-        em.remove(uno);
+        em.remove(t);
         return t;
     }
 

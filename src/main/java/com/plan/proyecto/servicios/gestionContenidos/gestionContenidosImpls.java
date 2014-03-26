@@ -70,11 +70,14 @@ public class gestionContenidosImpls implements GestionContenidos {
             return null;
         }
 
+        Contenido mensajeOriginal = daoContenido.findById(contenido.getId());        
         Contenido mensaje = daoContenido.findMensajeByComentario(contenido);
+        
         if (mensaje != null) {
             mensaje.getComentarios().remove(contenido);
+        } else {
+            daoContenido.eliminar(mensajeOriginal);
         }
-        daoContenido.eliminar(contenido);
         return contenido;
     }
 
