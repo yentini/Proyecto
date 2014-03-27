@@ -7,6 +7,7 @@
 <html>
     <head>
         <link rel="stylesheet" href="js/jquery-ui-1.10.4/css/ui-lightness/jquery-ui-1.10.4.custom.css">
+        <link rel="stylesheet" href="css/estilosPortada.css">
         <script src="js/jquery-1.11.0.js"></script>
         <script src="js/jquery-ui-1.10.4/js/jquery-ui-1.10.4.custom.js"></script>  
         <script src="js/jquery-validation-1.11.1/jquery.validate.js"></script> 
@@ -16,103 +17,115 @@
         <title>Alta de nuevas cuentas</title>
     </head>
     <body>
-        <h1>EWALL</h3>
-            <form:form id="login" action="formularioLogin.html" commandName="cuentaLogin">
-            <table>                      
-                <th><h2>Login</h2></th>
-                <tr>
-                    <td>Email:</td>
-                    <td>
-                        <form:input path="email"/>
-                    </td>
-                    <td>
-                        <form:errors path="email"/>
-                    </td>
-                </tr>
-                <tr>
-                    <td>Contraseña:</td>
-                    <td>
-                        <form:password path="password"/>
-                    </td>
-                    <td>
-                        <form:errors path="password"/>
-                    </td>
-                </tr>
-                <tr>
-                    <td colspan="3">
-                        <input type="submit" value="Continuar"/>
-                    </td>
-                </tr>
-            </table>
-        </form:form>
-        
-        <div><h3>${mensajeLogin}</h3></div>
-        
-        <form:form id="alta" action="formularioAlta.html" commandName="cuentaAlta">
-            <table>
-                <th><h2>Regístrate</h2></th>
-                <tr>
-                    <td>Nombre:</td>
-                    <td>
-                        <form:input path="nombre"/>
-                    </td>
-                    <td>
-                        <form:errors path="nombre"/>
-                    </td>
-                </tr>
-                <tr>
-                    <td>Apellidos:</td>
-                    <td>
-                        <form:input path="apellidos"/>
-                    </td>
-                    <td>
-                        <form:errors path="apellidos"/>
-                    </td>
-                </tr>
-                <tr>
-                    <td>Fecha de nacimiento:</td>
-                    <td>                        
-                        <form:input id="fechaNacimiento" path="fechaNacimiento"/>
-                    </td>
-                    <td>
-                        <form:errors path="fechaNacimiento"/>
-                    </td>
-                </tr>
-                <tr>
-                    <td>Correo electrónico:</td>
-                    <td>
-                        <form:input id="emailAlta" name="emailAlta" path="email"/>
-                    </td>
-                    <td>
-                        <form:errors path="email"/>
-                    </td>
-                </tr>
-                <tr>
-                    <td>Vuelve a introducir el correo:</td>
-                    <td>
-                        <input name="email_again"/>
-                    </td>
-                    <td>
-                        <form:errors id="email_again"/>
-                    </td>
-                </tr>
-                <tr>
-                    <td>Contraseña:</td>
-                    <td>
-                        <form:password id="password" name="password" path="password"/>
-                    </td>
-                    <td>
-                        <form:errors path="password"/>
-                    </td>
-                </tr>                
-                <tr>
-                    <td colspan="3">
-                        <input type="submit" value="Continuar"/>
-                    </td>
-                </tr>
-            </table>
-        </form:form>
-        
-        <div><h3>${mensajeAlta}</h3></div>
-</body>
+        <div id="principal">
+            <div id="cabecera">
+                <div id="rotuloEwall" class="izquierda">EWALL</div>
+                <div id ="loginDiv" class="izquierda">
+                    <div>
+                        <form:form id="login" action="formularioLogin.html" commandName="cuentaLogin">
+                            <table>   
+                                <tr>
+                                    <td colspan="2">Email:</td>
+                                    <td colspan="2">Contraseña:</td>                            
+                                </tr>
+                                <tr>       
+                                    <td>
+                                        <form:input class="cajasLogin" path="email"/>
+                                    </td>
+                                    <td>
+                                        <form:errors  class="cajasLogin" path="email"/>
+                                    </td>
+                                    <td>
+                                        <form:password  class="cajasLogin" path="password"/>
+                                    </td>
+                                    <td>
+                                        <form:errors  class="cajasLogin" path="password"/>
+                                    </td>
+
+                                    <td colspan="3">
+                                        <input id="botonEntrar" type="submit" value="Entrar"/>
+                                    </td>
+                                </tr>
+
+                            </table>
+                        </form:form>
+                    </div>
+                    <div><h3>${mensajeLogin}</h3></div>
+                </div>
+            </div>
+            <div id="cuerpo" class="clear">
+                <div id="imagen" class="izquierda"><img src='<c:url value="/imagenes/amigos.gif" />'/></div>
+                <div id="registro" class="izquierda">
+                    <div id="rotuloRegistro">Regístrate</div>
+                    <div id="formularioAlta">
+                        <form:form id="alta" action="formularioAlta.html" commandName="cuentaAlta">
+
+                            <table>
+                                <tr>
+                                    <td>Nombre:</td>
+                                    <td>
+                                        <form:input path="nombre"/>
+                                    </td>
+                                    <td>
+                                        <form:errors path="nombre"/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Apellidos:</td>
+                                    <td>
+                                        <form:input path="apellidos"/>
+                                    </td>
+                                    <td>
+                                        <form:errors path="apellidos"/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Fecha de nacimiento:</td>
+                                    <td>                        
+                                        <form:input id="fechaNacimiento" path="fechaNacimiento"/>
+                                    </td>
+                                    <td>
+                                        <form:errors path="fechaNacimiento"/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Correo electrónico:</td>
+                                    <td>
+                                        <form:input id="emailAlta" name="emailAlta" path="email"/>
+                                    </td>
+                                    <td>
+                                        <form:errors path="email"/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Vuelve a introducir el correo:</td>
+                                    <td>
+                                        <input name="email_again"/>
+                                    </td>
+                                    <td>
+                                        <form:errors id="email_again"/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Contraseña:</td>
+                                    <td>
+                                        <form:password id="password" name="password" path="password"/>
+                                    </td>
+                                    <td>
+                                        <form:errors path="password"/>
+                                    </td>
+                                </tr>                
+                                <tr>
+                                    <td colspan="3">
+                                        <input id="botonContinuar" type="submit" value=""/>
+                                    </td>
+                                </tr>
+                            </table>
+                        </form:form>
+                    </div>
+                </div>
+                <div><h3>${mensajeAlta}</h3></div>
+            </div>
+        </div>
+    </body>
 </html>
