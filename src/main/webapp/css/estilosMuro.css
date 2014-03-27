@@ -5,7 +5,47 @@ body{
 }
 
 .principal{
-    background-color: red;
-    margin-left: 15%;
     width: 70%;
+    margin-left: 15%;
+    background-color: #523ce6;
+}
+#contenidosMuro{
+    background-color: #5257D9;
+}
+#murosAmigos{
+}
+#murosAmigosPrincipal{
+    background-color: #5257D9;
+}
+#relacionesPrincipal{
+    background-color: #5257D9;
+}
+#rotulo{
+    font-family: "Brush Script MT", cursive;
+    font-size: 60px;  
+    color:#ffffff;
+}
+#rotuloCotenidos{
+    font-family: "Brush Script MT", cursive;
+    font-size: 35px;  
+    color:#ffffff;
+}
+#rotuloMuros{
+    font-family: "Brush Script MT", cursive;
+    font-size: 35px;  
+    color:#ffffff;
+}
+.izquierda{
+    float: left;
+}
+.clear{
+    clear: left;    
+}
+#abajo{
+    background-color: #523ce6;
+    height: 20px;
+    color:#ffffff;
+    text-align: right;
+    font-size: 10px;
+    padding-top: 3px;
 }

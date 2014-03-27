@@ -69,7 +69,7 @@ $(document).ready(function() {
         $("#retorno").show();
         $("#huecoCabecera").text("el EWALL de " + $("#nombreMuro").val());
     } else {
-        $("#huecoCabecera").text("en tu EWALL");
+        $("#huecoCabecera").text("tu EWALL");
         $("#retorno").hide();
         $(":input[value='Comentar']").hide();
         $(":input[value='Eliminar']").show();
