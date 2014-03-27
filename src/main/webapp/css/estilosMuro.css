@@ -13,6 +13,7 @@ body{
     background-color: #5257D9;
 }
 #murosAmigos{
+    background-color: #EEEEEE;
 }
 #murosAmigosPrincipal{
     background-color: #5257D9;
@@ -30,10 +31,31 @@ body{
     font-size: 35px;  
     color:#ffffff;
 }
+#rotuloSiMuros{
+    font-family: "Brush Script MT", cursive;
+    font-size: 16px;  
+    color:#1C94C4;
+}
+#rotuloMensajes{
+    font-family: "Brush Script MT", cursive;
+    font-size: 25px; 
+}
 #rotuloMuros{
     font-family: "Brush Script MT", cursive;
-    font-size: 35px;  
-    color:#ffffff;
+    font-size: 35px;
+    color: #ffffff;}
+
+#crearMensaje{
+    font-family: "Brush Script MT", cursive;
+    font-size: 25px;
+}
+#tabAmigos{
+     font-family: "Brush Script MT", cursive;
+    font-size: 20px;
+}
+#tabnAmigos{
+     font-family: "Brush Script MT", cursive;
+    font-size: 20px;
 }
 .izquierda{
     float: left;

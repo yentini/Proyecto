@@ -13,7 +13,6 @@ import com.plan.proyecto.servicios.gestionContenidos.GestionContenidos;
 import com.plan.proyecto.servicios.gestionCuentas.GestionCuentas;
 import com.plan.proyecto.servicios.gestionRelaciones.GestionRelaciones;
 import com.plan.proyecto.servicios.login.GestionLogin;
-import java.util.ArrayList;
 import java.util.List;
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -94,6 +93,9 @@ public class AltaControlador {
                 if (mensajes != null) {
                     model.addAttribute("vacio", mensajes.isEmpty());
                 }
+                if (muros.isEmpty()) {
+                    model.addAttribute("vacioMuros", muros.isEmpty());
+                }
                 return "muro";
             } else {
                 model.addAttribute("mensajeLogin", "El usuario no existe o la contraseña es incorrecta");
@@ -112,7 +114,7 @@ public class AltaControlador {
             List<Cuenta> amigos = gestionRelaciones.mostrarAmigos(retornoCuenta);
             List<Cuenta> usuarios = gestionRelaciones.amigosPotenciales(retornoCuenta);
             List<Cuenta> muros = gestionRelaciones.deQuienSoyAmigo(retornoCuenta);
-            
+
             model.addAttribute("muroId", retornoCuenta);
             model.addAttribute("muros", muros);
             model.addAttribute("amigos", amigos);
@@ -122,6 +124,9 @@ public class AltaControlador {
 
             if (mensajes != null) {
                 model.addAttribute("vacio", mensajes.isEmpty());
+            }
+            if (muros != null) {
+                model.addAttribute("vacioMuros", muros.isEmpty());
             }
             return "muro";
         } else {
@@ -153,6 +158,9 @@ public class AltaControlador {
             model.addAttribute("cuenta", retornoCuenta);
             if (mensajes != null) {
                 model.addAttribute("vacio", mensajes.isEmpty());
+            }
+            if (muros.isEmpty()) {
+                model.addAttribute("vacioMuros", muros.isEmpty());
             }
             return "muro";
         } else {
@@ -189,6 +197,9 @@ public class AltaControlador {
             if (mensajes != null) {
                 model.addAttribute("vacio", mensajes.isEmpty());
             }
+            if (muros.isEmpty()) {
+                model.addAttribute("vacioMuros", muros.isEmpty());
+            }
             return "muro";
         } else {
             model.addAttribute("mensajeLogin", "El usuario no existe o la contraseña es incorrecta");
@@ -210,7 +221,7 @@ public class AltaControlador {
             List<Cuenta> amigos = gestionRelaciones.mostrarAmigos(retornoCuenta);
             List<Cuenta> usuarios = gestionRelaciones.amigosPotenciales(retornoCuenta);
             List<Cuenta> muros = gestionRelaciones.deQuienSoyAmigo(retornoCuenta);
-            
+
             model.addAttribute("muroId", retornoCuenta);
             model.addAttribute("muros", muros);
             model.addAttribute("amigos", amigos);
@@ -219,6 +230,9 @@ public class AltaControlador {
             model.addAttribute("cuenta", retornoCuenta);
             if (mensajes != null) {
                 model.addAttribute("vacio", mensajes.isEmpty());
+            }
+            if (muros.isEmpty()) {
+                model.addAttribute("vacioMuros", muros.isEmpty());
             }
             return "muro";
         } else {
@@ -251,6 +265,9 @@ public class AltaControlador {
             if (mensajes != null) {
                 model.addAttribute("vacio", mensajes.isEmpty());
             }
+            if (muros.isEmpty()) {
+                model.addAttribute("vacioMuros", muros.isEmpty());
+            }
             return "muro";
         } else {
             model.addAttribute("mensajeLogin", "El usuario no existe o la contraseña es incorrecta");
@@ -282,6 +299,9 @@ public class AltaControlador {
             if (mensajes != null) {
                 model.addAttribute("vacio", mensajes.isEmpty());
             }
+            if (muros.isEmpty()) {
+                model.addAttribute("vacioMuros", muros.isEmpty());
+            }
             return "muro";
         } else {
             model.addAttribute("mensajeLogin", "El usuario no existe o la contraseña es incorrecta");
@@ -312,6 +332,9 @@ public class AltaControlador {
 
             if (mensajes != null) {
                 model.addAttribute("vacio", mensajes.isEmpty());
+            }
+            if (muros.isEmpty()) {
+                model.addAttribute("vacioMuros", muros.isEmpty());
             }
             return "muro";
         } else {

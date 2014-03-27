@@ -44,44 +44,54 @@
             <div id="cuerpo">
                 <div id="contenidosMuro">
                     <div id="rotuloCotenidos">Contenidos del muro</div>
-                    <div id="mensajeAcordeon" class="acordeonPrincipal">                
-                        <c:forEach items="${mensajes}" var="mensaje">
-                            <h2>
-                                ${mensaje.resumen}
-                            </h2>
-                            <div>    
-                                <div>
-                                    <form:form id="eliminarForm" action="eliminarMensaje.html?identMensaje=${mensaje.id}&ident=${cuenta.id}">
-                                        <p>${mensaje.texto}</p>
-                                        <!--  <input id="eliminarBoton" class="eliminarBoton" type="button" value="Eliminar">-->
-                                        <input id="crearComentario" class="crearComentario" name="${mensaje.id}" type="button" value="Comentar">
-                                        <input type="submit" value="Eliminar">
-                                    </form:form>
+                    <div id="mensajeAcordeon" class="acordeonPrincipal">  
+                        <c:if test="${vacio == true}">
+                            <div id="rotuloMensajes"><h2>No tienes mensajes</h2></div>
+                        </c:if>
+                        <c:if test="${vacio == false}">
+                            <c:forEach items="${mensajes}" var="mensaje">
+                                <h2>
+                                    ${mensaje.resumen}
+                                </h2>
+                                <div>    
+                                    <div>
+                                        <form:form id="eliminarForm" action="eliminarMensaje.html?identMensaje=${mensaje.id}&ident=${cuenta.id}">
+                                            <p>${mensaje.texto}</p>
+                                            <!--  <input id="eliminarBoton" class="eliminarBoton" type="button" value="Eliminar">-->
+                                            <input id="crearComentario" class="crearComentario" name="${mensaje.id}" type="button" value="Comentar">
+                                            <input type="submit" value="Eliminar">
+                                        </form:form>
+                                    </div>
+                                    <div id="comentarioAcordeon" class="acordeonSecundario">
+                                        <c:forEach items="${mensaje.comentarios}" var="comentario">
+                                            <h3>
+                                                ${comentario.cuenta.nombre} dice: ${comentario.resumen}
+                                            </h3>
+                                            <div>
+                                                <form:form id="eliminarComentarioForm" action="eliminarMensaje.html?identMensaje=${comentario.id}&ident=${cuenta.id}">
+                                                    <p>${comentario.texto}</p>
+                                                    <input id="eliminarBoton" type="button" value="Eliminar"/>
+                                                </form:form>
+                                            </div>
+                                        </c:forEach>
+                                    </div>
                                 </div>
-                                <div id="comentarioAcordeon" class="acordeonSecundario">
-                                    <c:forEach items="${mensaje.comentarios}" var="comentario">
-                                        <h3>
-                                            ${comentario.cuenta.nombre} dice: ${comentario.resumen}
-                                        </h3>
-                                        <div>
-                                            <form:form id="eliminarComentarioForm" action="eliminarMensaje.html?identMensaje=${comentario.id}&ident=${cuenta.id}">
-                                                <p>${comentario.texto}</p>
-                                                <input id="eliminarBoton" type="button" value="Eliminar"/>
-                                            </form:form>
-                                        </div>
-                                    </c:forEach>
-                                </div>
-                            </div>
-                        </c:forEach>
+                            </c:forEach>
+                        </c:if>
                     </div>
                 </div>
 
                 <div id = "murosAmigosPrincipal" >
                     <div id="rotuloMuros">Puedes visitar los siguientes muros</div>
                     <div id="murosAmigos">
-                        <c:forEach items="${muros}" var="muro">
-                            <h3><a href="cambiarMuro.html?idAmigo=${muro.id}&ident=${cuenta.id}">${muro.nombre}</a></h3><br>
-                            </c:forEach>
+                        <c:if test="${vacioMuros == true}">
+                            <div id="rotuloSiMuros"><h2>No tienes muros que visitar</h2></div>
+                        </c:if>
+                        <c:if test="${vacioMuros == false}">
+                            <c:forEach items="${muros}" var="muro">
+                                <h3><a href="cambiarMuro.html?idAmigo=${muro.id}&ident=${cuenta.id}">${muro.nombre} </a></h3>
+                                </c:forEach>
+                            </c:if>
                         <div id="muros">
 
                         </div>
@@ -91,8 +101,8 @@
                     <div id="rotuloMuros">Gestión de amigos</div>
                     <div id="relaciones">
                         <ul>
-                            <li><a href="#amigos">Amigos</a></li>
-                            <li><a href="#posiblesAmigos">Nuevos Amigos</a></li>
+                            <li><a id="tabAmigos" href="#amigos">Amigos</a></li>
+                            <li><a id="tabnAmigos" href="#posiblesAmigos">Nuevos Amigos</a></li>
                         </ul>
                         <div id="amigos">
                             <c:forEach items="${amigos}" var="amigo">
