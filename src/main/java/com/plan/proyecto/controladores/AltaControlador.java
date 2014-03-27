@@ -5,6 +5,7 @@
  */
 package com.plan.proyecto.controladores;
 
+import com.plan.proyecto.beans.Comentario;
 import com.plan.proyecto.beans.Contenido;
 import com.plan.proyecto.beans.Cuenta;
 import com.plan.proyecto.beans.Mensaje;
@@ -12,6 +13,7 @@ import com.plan.proyecto.servicios.gestionContenidos.GestionContenidos;
 import com.plan.proyecto.servicios.gestionCuentas.GestionCuentas;
 import com.plan.proyecto.servicios.gestionRelaciones.GestionRelaciones;
 import com.plan.proyecto.servicios.login.GestionLogin;
+import java.util.ArrayList;
 import java.util.List;
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -59,6 +61,11 @@ public class AltaControlador {
         return new Mensaje("Escribe el mensaje...");
     }
 
+    @ModelAttribute("comentario")
+    public Contenido getComentario() {
+        return new Comentario("Escribe el comentario...");
+    }
+
     @RequestMapping(value = "/alta.html", method = RequestMethod.GET)
     public void tratarGet() {
     }
@@ -78,7 +85,7 @@ public class AltaControlador {
                 List<Cuenta> usuarios = gestionRelaciones.amigosPotenciales(retornoCuenta);
                 List<Cuenta> muros = gestionRelaciones.deQuienSoyAmigo(retornoCuenta);
 
-                model.addAttribute("muroId",retornoCuenta);
+                model.addAttribute("muroId", retornoCuenta);
                 model.addAttribute("muros", muros);
                 model.addAttribute("amigos", amigos);
                 model.addAttribute("usuarios", usuarios);
@@ -105,8 +112,8 @@ public class AltaControlador {
             List<Cuenta> amigos = gestionRelaciones.mostrarAmigos(retornoCuenta);
             List<Cuenta> usuarios = gestionRelaciones.amigosPotenciales(retornoCuenta);
             List<Cuenta> muros = gestionRelaciones.deQuienSoyAmigo(retornoCuenta);
-
-            model.addAttribute("muroId",retornoCuenta);
+            
+            model.addAttribute("muroId", retornoCuenta);
             model.addAttribute("muros", muros);
             model.addAttribute("amigos", amigos);
             model.addAttribute("usuarios", usuarios);
@@ -136,11 +143,46 @@ public class AltaControlador {
             List<Cuenta> usuarios = gestionRelaciones.amigosPotenciales(retornoCuenta);
             List<Cuenta> muros = gestionRelaciones.deQuienSoyAmigo(retornoCuenta);
 
-            model.addAttribute("muroId",retornoCuenta);
+            model.addAttribute("muroId", retornoCuenta);
             model.addAttribute("muros", muros);
             model.addAttribute("amigos", amigos);
             model.addAttribute("usuarios", usuarios);
             mensaje = new Mensaje("Escribe el mensaje...");
+            model.addAttribute("mensaje", mensaje);
+            model.addAttribute("mensajes", mensajes);
+            model.addAttribute("cuenta", retornoCuenta);
+            if (mensajes != null) {
+                model.addAttribute("vacio", mensajes.isEmpty());
+            }
+            return "muro";
+        } else {
+            model.addAttribute("mensajeLogin", "El usuario no existe o la contraseña es incorrecta");
+            return "alta";
+        }
+    }
+
+    @RequestMapping(value = "/formularioPublicarComentario.html", method = RequestMethod.POST)
+    public String tratarComentario(@RequestParam("idAmigo") Long idAmigo, @RequestParam("ident") Long id, @RequestParam("mensajeId") Long idMensaje, @ModelAttribute("comentario") Contenido comentario, Model model) {
+
+        Cuenta retornoCuenta = gc.devolverCuenta(id);
+        Cuenta amigo = gc.devolverCuenta(idAmigo);
+
+        Contenido mensaje = gestionContenidos.devolverContenido(idMensaje);
+
+        gestionContenidos.publicarContenido(retornoCuenta, mensaje, comentario);
+
+        if (retornoCuenta != null) {
+
+            List<Mensaje> mensajes = gestionContenidos.mostrarMensajes(amigo);
+            List<Cuenta> amigos = gestionRelaciones.mostrarAmigos(amigo);
+            List<Cuenta> usuarios = gestionRelaciones.amigosPotenciales(amigo);
+            List<Cuenta> muros = gestionRelaciones.deQuienSoyAmigo(amigo);
+
+            model.addAttribute("muroId", amigo);
+            model.addAttribute("muros", muros);
+            model.addAttribute("amigos", amigos);
+            model.addAttribute("usuarios", usuarios);
+            mensaje = new Mensaje("Escribe el comentario...");
             model.addAttribute("mensaje", mensaje);
             model.addAttribute("mensajes", mensajes);
             model.addAttribute("cuenta", retornoCuenta);
@@ -168,8 +210,8 @@ public class AltaControlador {
             List<Cuenta> amigos = gestionRelaciones.mostrarAmigos(retornoCuenta);
             List<Cuenta> usuarios = gestionRelaciones.amigosPotenciales(retornoCuenta);
             List<Cuenta> muros = gestionRelaciones.deQuienSoyAmigo(retornoCuenta);
-
-            model.addAttribute("muroId",retornoCuenta);
+            
+            model.addAttribute("muroId", retornoCuenta);
             model.addAttribute("muros", muros);
             model.addAttribute("amigos", amigos);
             model.addAttribute("usuarios", usuarios);
@@ -199,7 +241,7 @@ public class AltaControlador {
             List<Cuenta> usuarios = gestionRelaciones.amigosPotenciales(retornoCuenta);
             List<Cuenta> muros = gestionRelaciones.deQuienSoyAmigo(retornoCuenta);
 
-            model.addAttribute("muroId",retornoCuenta);
+            model.addAttribute("muroId", retornoCuenta);
             model.addAttribute("muros", muros);
             model.addAttribute("amigos", amigos);
             model.addAttribute("usuarios", usuarios);
@@ -230,7 +272,7 @@ public class AltaControlador {
             List<Cuenta> usuarios = gestionRelaciones.amigosPotenciales(retornoCuenta);
             List<Cuenta> muros = gestionRelaciones.deQuienSoyAmigo(retornoCuenta);
 
-            model.addAttribute("muroId",retornoCuenta);
+            model.addAttribute("muroId", retornoCuenta);
             model.addAttribute("muros", muros);
             model.addAttribute("amigos", amigos);
             model.addAttribute("usuarios", usuarios);
@@ -246,7 +288,7 @@ public class AltaControlador {
             return "alta";
         }
     }
-    
+
     @RequestMapping(value = "/cambiarMuro.html", method = RequestMethod.GET)
     public String cambiarMuro(@RequestParam("idAmigo") Long idAmigo, @RequestParam("ident") Long id, Model model) {
 
@@ -261,7 +303,7 @@ public class AltaControlador {
             List<Cuenta> usuarios = gestionRelaciones.amigosPotenciales(amigo);
             List<Cuenta> muros = gestionRelaciones.deQuienSoyAmigo(amigo);
 
-            model.addAttribute("muroId",amigo);
+            model.addAttribute("muroId", amigo);
             model.addAttribute("muros", muros);
             model.addAttribute("amigos", amigos);
             model.addAttribute("usuarios", usuarios);

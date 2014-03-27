@@ -18,6 +18,7 @@ import javax.persistence.NamedQuery;
 @DiscriminatorValue("C")
 @NamedQueries({
     @NamedQuery(name = "Comentario.findComentarioByCuenta", query = "SELECT m FROM Comentario m WHERE m.cuenta.id = :idValor")
+    
 })
 public class Comentario extends Contenido {
 

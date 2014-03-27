@@ -23,7 +23,7 @@ $(document).ready(function() {
             }}
     });
 
-    $("#eliminarBoton").button().click(function() {
+    $(".eliminarBoton").button().click(function() {
         $("#eliminarForm").submit();
     });
 
@@ -31,12 +31,29 @@ $(document).ready(function() {
         $("#dialog-mensaje").dialog("open");
     });
 
-    $("#crearComentario").button().click(function() {
+    $(".crearComentario").button().click(function() {
         $("#dialog-comentario").dialog("open");
+        $("#comentarioForm").attr("action", "formularioPublicarComentario.html?ident=" + $("#idCuenta").val() + "&mensajeId=" + this.name + "&idAmigo=" + $("#idMuro").val());
     });
 
-    $("#mensajeAcordeon").accordion({
-        collapsible: true
+//    $("#mensajeAcordeon").accordion({
+//    });
+//
+//    $("#comentarioAcordeon").accordion({
+//    });
+
+    $(".acordeonPrincipal").accordion({
+        header: "h2",
+        autoHeight: true,
+        collapsible: true,
+        active: false
+    });
+
+    $(".acordeonSecundario").accordion({
+        header: "h3",
+        autoHeight: true,
+        collapsible: true,
+        active: false
     });
 
     $("#relaciones").tabs({
@@ -48,17 +65,19 @@ $(document).ready(function() {
         $("#relacionesPrincipal").hide();
         $("#dialog-mensajePrincipal").hide();
         $(":input[value='Eliminar']").hide();
+        $(":input[value='Comentar']").show();
         $("#retorno").show();
         $("#huecoCabecera").text("el EWALL de " + $("#nombreMuro").val());
     } else {
         $("#huecoCabecera").text("en tu EWALL");
         $("#retorno").hide();
+        $(":input[value='Comentar']").hide();
+        $(":input[value='Eliminar']").show();
     }
     ;
 });
 function eliminarMensaje(id) {
     var mensaje = "#mensaje" + id;
-
     $(mensaje).submit();
 }
 //    function llamadaAjax() {
