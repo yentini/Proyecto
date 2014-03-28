@@ -93,9 +93,9 @@ public class AltaControlador {
                 if (mensajes != null) {
                     model.addAttribute("vacio", mensajes.isEmpty());
                 }
-                if (muros.isEmpty()) {
-                    model.addAttribute("vacioMuros", muros.isEmpty());
-                }
+                if (muros != null) {
+                model.addAttribute("vacioMuros", muros.isEmpty());
+            }
                 return "muro";
             } else {
                 model.addAttribute("mensajeLogin", "El usuario no existe o la contraseña es incorrecta");
@@ -159,7 +159,7 @@ public class AltaControlador {
             if (mensajes != null) {
                 model.addAttribute("vacio", mensajes.isEmpty());
             }
-            if (muros.isEmpty()) {
+            if (muros != null) {
                 model.addAttribute("vacioMuros", muros.isEmpty());
             }
             return "muro";
@@ -197,7 +197,7 @@ public class AltaControlador {
             if (mensajes != null) {
                 model.addAttribute("vacio", mensajes.isEmpty());
             }
-            if (muros.isEmpty()) {
+            if (muros != null) {
                 model.addAttribute("vacioMuros", muros.isEmpty());
             }
             return "muro";
@@ -231,7 +231,7 @@ public class AltaControlador {
             if (mensajes != null) {
                 model.addAttribute("vacio", mensajes.isEmpty());
             }
-            if (muros.isEmpty()) {
+            if (muros != null) {
                 model.addAttribute("vacioMuros", muros.isEmpty());
             }
             return "muro";
@@ -265,7 +265,7 @@ public class AltaControlador {
             if (mensajes != null) {
                 model.addAttribute("vacio", mensajes.isEmpty());
             }
-            if (muros.isEmpty()) {
+            if (muros != null) {
                 model.addAttribute("vacioMuros", muros.isEmpty());
             }
             return "muro";
@@ -299,7 +299,7 @@ public class AltaControlador {
             if (mensajes != null) {
                 model.addAttribute("vacio", mensajes.isEmpty());
             }
-            if (muros.isEmpty()) {
+            if (muros != null) {
                 model.addAttribute("vacioMuros", muros.isEmpty());
             }
             return "muro";
@@ -333,7 +333,7 @@ public class AltaControlador {
             if (mensajes != null) {
                 model.addAttribute("vacio", mensajes.isEmpty());
             }
-            if (muros.isEmpty()) {
+            if (muros != null) {
                 model.addAttribute("vacioMuros", muros.isEmpty());
             }
             return "muro";

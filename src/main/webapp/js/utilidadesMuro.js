@@ -63,12 +63,14 @@ $(document).ready(function() {
     if ($("#idCuenta").val() != $("#idMuro").val()) {
         $("#murosAmigosPrincipal").hide();
         $("#relacionesPrincipal").hide();
+        $("#crearMensaje").hide();
         $("#dialog-mensajePrincipal").hide();
         $(":input[value='Eliminar']").hide();
         $(":input[value='Comentar']").show();
         $("#retorno").show();
         $("#huecoCabecera").text("el EWALL de " + $("#nombreMuro").val());
     } else {
+        $("#crearMensaje").show();
         $("#huecoCabecera").text("tu EWALL");
         $("#retorno").hide();
         $(":input[value='Comentar']").hide();

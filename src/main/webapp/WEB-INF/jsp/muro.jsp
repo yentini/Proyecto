@@ -35,13 +35,19 @@
 
         <div class="principal">
             <div id="cabecera">
-                <div id="rotulo">${cuenta.nombre} estás en <span id="huecoCabecera"></span></div>
-                <div id="retorno"><h3><a href="cambiarMuro.html?idAmigo=${cuenta.id}&ident=${cuenta.id}">Vuelve a tu EWALL</a></h3></div>
-                <div>
-                    <button id="crearMensaje">Publicar mensaje</button>
+                <div id="fondo" class="izquierda">
+                    <div id="rotulo">${cuenta.nombre} estás en <span id="huecoCabecera"></span></div>                
+                    <div id="retorno" ><h3><a id="vuelveEwall" href="cambiarMuro.html?idAmigo=${cuenta.id}&ident=${cuenta.id}">Vuelve a tu EWALL</a></h3></div>
+                    <div id="rotuloPublicar">
+                        <button id="crearMensaje">Publicar mensaje</button>
+                    </div></div>  
+                <div id="botonSalir" class="derecha">
+                    <a href="alta.html"><img src='<c:url value="/imagenes/Boton-Salir.png" />'/></a>
                 </div>
+
+
             </div>
-            <div id="cuerpo">
+            <div id="cuerpo" class="clear">
                 <div id="contenidosMuro">
                     <div id="rotuloCotenidos">Contenidos del muro</div>
                     <div id="mensajeAcordeon" class="acordeonPrincipal">  
@@ -89,9 +95,9 @@
                         </c:if>
                         <c:if test="${vacioMuros == false}">
                             <c:forEach items="${muros}" var="muro">
-                                <h3><a href="cambiarMuro.html?idAmigo=${muro.id}&ident=${cuenta.id}">${muro.nombre} </a></h3>
-                                </c:forEach>
-                            </c:if>
+                                <a class="enlacesMuro" href="cambiarMuro.html?idAmigo=${muro.id}&ident=${cuenta.id}">${muro.nombre} </a>
+                            </c:forEach>
+                        </c:if>
                         <div id="muros">
 
                         </div>
@@ -106,12 +112,12 @@
                         </ul>
                         <div id="amigos">
                             <c:forEach items="${amigos}" var="amigo">
-                                <a href="quitarAmigo.html?idAmigo=${amigo.id}&ident=${cuenta.id}">${amigo.nombre}</a><br>
+                                <a class="enlacesAmigos" href="quitarAmigo.html?idAmigo=${amigo.id}&ident=${cuenta.id}">${amigo.nombre}</a>
                             </c:forEach>
                         </div>
                         <div id="posiblesAmigos">
                             <c:forEach items="${usuarios}" var="usuario">
-                                <a href="hacerAmigo.html?idAmigo=${usuario.id}&ident=${cuenta.id}">${usuario.nombre}</a><br>
+                                <a class="enlacesAmigos" href="hacerAmigo.html?idAmigo=${usuario.id}&ident=${cuenta.id}">${usuario.nombre}</a>
                             </c:forEach>
                         </div>
                     </div>

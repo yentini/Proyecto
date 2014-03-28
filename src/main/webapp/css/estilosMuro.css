@@ -7,34 +7,49 @@ body{
 .principal{
     width: 70%;
     margin-left: 15%;
-    background-color: #523ce6;
+    background-color: #ffff66;
+}
+#cabecera{
+     background-color: #523ce6;
 }
 #contenidosMuro{
-    background-color: #5257D9;
+    background-color: #ffff66;
 }
 #murosAmigos{
     background-color: #EEEEEE;
 }
 #murosAmigosPrincipal{
-    background-color: #5257D9;
+    background-color: #ffff66;
 }
 #relacionesPrincipal{
-    background-color: #5257D9;
+    background-color: #ffff66;
+}
+#fondo{
+    background-color: #523ce6;
 }
 #rotulo{
     font-family: "Brush Script MT", cursive;
     font-size: 60px;  
     color:#ffffff;
+    padding-left: 140px;
 }
 #rotuloCotenidos{
     font-family: "Brush Script MT", cursive;
     font-size: 35px;  
-    color:#ffffff;
+    color:#523ce6;
+}
+#rotuloPublicar{
+    padding-left: 300px;
+    background-color:#523ce6;
+}
+#retorno{
+    background-color:#523ce6;
 }
 #rotuloSiMuros{
     font-family: "Brush Script MT", cursive;
     font-size: 16px;  
     color:#1C94C4;
+    padding-left: 52px;
 }
 #rotuloMensajes{
     font-family: "Brush Script MT", cursive;
@@ -43,25 +58,32 @@ body{
 #rotuloMuros{
     font-family: "Brush Script MT", cursive;
     font-size: 35px;
-    color: #ffffff;}
+    color: #523ce6;
+    background-color: #ffff66}
 
 #crearMensaje{
     font-family: "Brush Script MT", cursive;
     font-size: 25px;
+    width: 210px;
+    height:50px;
 }
+
 #tabAmigos{
-     font-family: "Brush Script MT", cursive;
+    font-family: "Brush Script MT", cursive;
     font-size: 20px;
 }
 #tabnAmigos{
-     font-family: "Brush Script MT", cursive;
+    font-family: "Brush Script MT", cursive;
     font-size: 20px;
 }
 .izquierda{
     float: left;
 }
+.derecha{
+    float: right;
+}
 .clear{
-    clear: left;    
+    clear: both;    
 }
 #abajo{
     background-color: #523ce6;
@@ -70,4 +92,27 @@ body{
     text-align: right;
     font-size: 10px;
     padding-top: 3px;
+}
+.enlacesMuro{
+    font-family: "Brush Script MT", cursive;
+    font-size: 25px;  
+    color:#1C94C4;
+    padding-left: 40px;
+}
+.enlacesAmigos{
+    font-family: "Brush Script MT", cursive;
+    font-size: 25px;  
+    color:#1C94C4;
+    padding-left: 10px;
+}
+
+#vuelveEwall{
+    font-family: "Brush Script MT", cursive;
+    font-size: 25px;  
+    color:#F7AE36;
+    padding-left: 300px;
+}
+#botonSalir{
+    width: 200px;
+    background-color: #523ce6;
 }
