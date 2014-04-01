@@ -113,6 +113,12 @@ body{
     padding-left: 300px;
 }
 #botonSalir{
-    width: 200px;
-    background-color: #523ce6;
+}
+#relleno{
+    width: 92%;
+    height: 100%;
+}
+#pie{
+     background-color: #523ce6;
+     height: 27px;
 }

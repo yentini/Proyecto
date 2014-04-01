@@ -35,17 +35,19 @@
 
         <div class="principal">
             <div id="cabecera">
-                <div id="fondo" class="izquierda">
+                <div id="fondo">
                     <div id="rotulo">${cuenta.nombre} estás en <span id="huecoCabecera"></span></div>                
                     <div id="retorno" ><h3><a id="vuelveEwall" href="cambiarMuro.html?idAmigo=${cuenta.id}&ident=${cuenta.id}">Vuelve a tu EWALL</a></h3></div>
                     <div id="rotuloPublicar">
                         <button id="crearMensaje">Publicar mensaje</button>
-                    </div></div>  
-                <div id="botonSalir" class="derecha">
-                    <a href="alta.html"><img src='<c:url value="/imagenes/Boton-Salir.png" />'/></a>
-                </div>
-
-
+                    </div>
+                    <div id="pie">
+                        <div id="relleno" class="izquierda"></div>
+                        <div id="botonSalir" class="izquierda">
+                            <a href="alta.html"><img src='<c:url value="/imagenes/Boton-Salir.png" />'/></a>
+                        </div>
+                    </div>
+                </div>  
             </div>
             <div id="cuerpo" class="clear">
                 <div id="contenidosMuro">
