@@ -2,6 +2,7 @@ body{
     margin: 0;
     padding: 0;
     border: 0;
+    background-color: lemonchiffon;
 }
 
 .principal{
@@ -11,6 +12,7 @@ body{
 }
 #cabecera{
      background-color: #523ce6;
+     padding-top: 25px;
 }
 #contenidosMuro{
     background-color: #ffff66;
@@ -31,7 +33,8 @@ body{
     font-family: "Brush Script MT", cursive;
     font-size: 60px;  
     color:#ffffff;
-    padding-left: 140px;
+    text-align: center;
+    /*padding-left: 140px;*/
 }
 #rotuloCotenidos{
     font-family: "Brush Script MT", cursive;
@@ -42,9 +45,7 @@ body{
     padding-left: 300px;
     background-color:#523ce6;
 }
-#retorno{
-    background-color:#523ce6;
-}
+
 #rotuloSiMuros{
     font-family: "Brush Script MT", cursive;
     font-size: 16px;  
@@ -82,6 +83,9 @@ body{
 .derecha{
     float: right;
 }
+#cuerpo{
+    border-color: #000000;
+}
 .clear{
     clear: both;    
 }
@@ -106,16 +110,19 @@ body{
     padding-left: 10px;
 }
 
-#vuelveEwall{
+#retorno{
+    padding-top: 10px;
     font-family: "Brush Script MT", cursive;
     font-size: 25px;  
-    color:#F7AE36;
-    padding-left: 300px;
+    text-align: center;
 }
-#botonSalir{
+
+#vuelveEwall{
+    color: #ffffff;
 }
+
 #relleno{
-    width: 92%;
+    width: 90%;
     height: 100%;
 }
 #pie{

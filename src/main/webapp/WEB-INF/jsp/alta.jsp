@@ -124,7 +124,7 @@
                         </form:form>
                     </div>
                 </div>
-                <div><h3>${mensajeAlta}</h3></div>
+                <div class="clear" id="mensajeAlta"><h3>${mensajeAlta}</h3></div>
             </div>
         </div>
     </body>

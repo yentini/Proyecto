@@ -37,10 +37,10 @@
             <div id="cabecera">
                 <div id="fondo">
                     <div id="rotulo">${cuenta.nombre} estás en <span id="huecoCabecera"></span></div>                
-                    <div id="retorno" ><h3><a id="vuelveEwall" href="cambiarMuro.html?idAmigo=${cuenta.id}&ident=${cuenta.id}">Vuelve a tu EWALL</a></h3></div>
-                    <div id="rotuloPublicar">
+                    <div id="retorno" ><a id="vuelveEwall" href="cambiarMuro.html?idAmigo=${cuenta.id}&ident=${cuenta.id}">Vuelve a tu EWALL</a></div>
+                    <!--<div id="rotuloPublicar">
                         <button id="crearMensaje">Publicar mensaje</button>
-                    </div>
+                    </div>-->
                     <div id="pie">
                         <div id="relleno" class="izquierda"></div>
                         <div id="botonSalir" class="izquierda">
@@ -51,7 +51,7 @@
             </div>
             <div id="cuerpo" class="clear">
                 <div id="contenidosMuro">
-                    <div id="rotuloCotenidos">Contenidos del muro</div>
+                    <div id="rotuloCotenidos">Contenidos del muro<label id="etiquetaPublicar"> - Publicar mensaje</label></div>
                     <div id="mensajeAcordeon" class="acordeonPrincipal">  
                         <c:if test="${vacio == true}">
                             <div id="rotuloMensajes"><h2>No tienes mensajes</h2></div>

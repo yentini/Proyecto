@@ -63,20 +63,25 @@ $(document).ready(function() {
     if ($("#idCuenta").val() != $("#idMuro").val()) {
         $("#murosAmigosPrincipal").hide();
         $("#relacionesPrincipal").hide();
-        $("#crearMensaje").hide();
+//        $("#crearMensaje").hide();
+        $("#etiquetaPublicar").hide();
         $("#dialog-mensajePrincipal").hide();
         $(":input[value='Eliminar']").hide();
         $(":input[value='Comentar']").show();
         $("#retorno").show();
         $("#huecoCabecera").text("el EWALL de " + $("#nombreMuro").val());
     } else {
-        $("#crearMensaje").show();
+//        $("#crearMensaje").show();
+        $("#etiquetaPublicar").show();
         $("#huecoCabecera").text("tu EWALL");
         $("#retorno").hide();
         $(":input[value='Comentar']").hide();
         $(":input[value='Eliminar']").show();
     }
     ;
+    $("#etiquetaPublicar").click(function() {
+        $("#dialog-mensaje").dialog("open");
+    });
 });
 function eliminarMensaje(id) {
     var mensaje = "#mensaje" + id;
